@@ -1,127 +1,19 @@
 <resources>
     <string name="app_name">Urban Dictionary</string>
 
-    <!-- bottom navigation bar -->
-    <string name="title_donations">Donations</string>
-    <string name="title_inventory">Inventory</string>
-    <string name="title_transfusions">Transfusions</string>
-
     <!-- toolbar overflow menu actions -->
-    <string name="action_favorites">Favorites</string>
     <string name="action_toggle_themes">Change Theme</string>
-    <string name="action_settings">Settings</string>
-    <string name="staging_database_count">Staging Database</string>
 
     <!-- standard modals -->
-    <string name="std_modal_no_repository_title">Database cannot be created</string>
-    <string name="std_modal_no_repository_body">App cannot continue</string>
-    <string name="std_modal_initialize_database_failure_title">Timeout while fetching remote database</string>
-    <string name="std_modal_refresh_success_title">Database successfully refreshed</string>
-    <string name="std_modal_refresh_success_body">Path Name "%s" exists and was backed up before refreshing</string>
-    <string name="std_modal_insert_donor_staging_title">Staging Entry for Meaning Insertion</string>
-    <string name="std_modal_insert_donor_staging_body">An entry was made to the staging database for insertion of new donors into the remote database</string>
-    <string name="std_modal_insert_products_staging_title">Staging Entry for Product List Insertion</string>
-    <string name="std_modal_insert_products_staging_body">An entry was made to the staging database for insertion of a list of new products into the remote database</string>
-    <string name="std_modal_modify_staging_title">Staging Entry for Modification</string>
-    <string name="std_modal_modify_staging_body">An entry was made to the staging database for modification of existing donors currently in the remote database</string>
-    <string name="std_modal_noconfirm_title">Grid Entry Not Confirmed</string>
-    <string name="std_modal_noconfirm_body">Complete button was clicked without confirming current grid entry. Do you want to confirm?</string>
-    <string name="std_modal_no_change_in_database_title">No entries made into the staging databases</string>
-    <string name="std_modal_staging_database_count_title">Show number of entries in each staging database</string>
-    <string name="std_modal_staging_database_count_body">Staging DB donors: %d entries\nMain DB donors: %d entries\nStaging DB products: %d entries\nMain DB products: %d entries</string>
-    <string name="std_modal_password_authentication_hint">Password</string>
-    <string name="std_modal_submit">Submit</string>
-    <string name="std_modal_cancel">Cancel</string>
+    <string name="std_modal_urban_dictionary_failure_title">Timeout or Error in Search</string>
+    <string name="std_modal_urban_dictionary_failure_body">Please try a search again or check your network connection to ensure you are connected</string>
     <string name="std_modal_ok">OK</string>
-    <string name="std_modal_yes">YES</string>
-    <string name="std_modal_no">NO</string>
 
     <!-- button name text -->
-    <string name="button_insert">Insert</string>
-    <string name="button_submit">Submit</string>
     <string name="button_search">Search</string>
-    <string name="button_update">Update</string>
-    <string name="button_new_donor">New Meaning</string>
-    <string name="button_clear">Clear</string>
-    <string name="button_confirm">Confirm</string>
-    <string name="button_edit">Edit</string>
-    <string name="button_done">Done</string>
-    <string name="button_complete">Complete</string>
-
-    <!-- donor strings -->
-    <string name="donor_search_string">Meaning Search String</string>
-    <string name="donor_incorrect_search_string">Incorrect Meaning Search String</string>
-    <string name="donor_correct_search_string">Correct Meaning Search String</string>
-    <string name="donor_last_name">Enter Last Name</string>
-    <string name="donor_middle_name">Enter Middle Name</string>
-    <string name="donor_first_name">Enter First Name</string>
-    <string name="donor_dob">Enter DOB</string>
-    <string name="donor_gender">Enter Gender</string>
-    <string name="donor_abo_rh">Enter ABO/Rh</string>
-    <string name="donor_branch">Enter Branch</string>
-    <string name="donor_nationality">Enter Nationality</string>
-    <string name="donor_military_unit">Enter Military Unit</string>
-    <string name="donor_today_date">Enter Date</string>
-    <string name="dd_572_completed">DD-572 Completed?</string>
-    <string name="ttd_samples_collected">TTD Samples Collected?</string>
-    <string name="donor_male">Male</string>
-    <string name="donor_female">Female</string>
-    <string name="donor_incorrect_donor">Incorrect Meaning</string>
-
-    <!-- product strings -->
-    <string name="product_din">DIN</string>
-    <string name="product_abo_rh">ABO/RH</string>
-    <string name="product_code">PRODUCT CODE</string>
-    <string name="product_expiration_date">EXPIRATION</string>
-    <string name="product_din_hint_string">DIN</string>
-    <string name="product_code_hint_string">Product Code</string>
-    <string name="product_expiration_date_hint_string">Expiration</string>
-
-    <!-- navigation drawer menu -->
-    <string name="nav_drawer_donate_products">Donate Products</string>
-    <string name="nav_drawer_manage_donor">Manage Meaning</string>
-    <string name="nav_drawer_reassociate_donation">Reassociate Donation</string>
-    <string name="nav_drawer_update_test_results">Update Test Results</string>
-    <string name="nav_drawer_view_donor_list">View Meaning List</string>
-    <string name="nav_drawer_title">Theatre Blood Android App</string>
-    <string name="nav_drawer_subtitle">JOMIS, Department of Defense</string>
 
     <!-- miscellaneous -->
-    <string name="search_no_elements">No donors found in search</string>
-    <string name="search_no_incorrect_donors">No incorrect donors found in search</string>
-    <string name="radio_gender_male">Male</string>
-    <string name="radio_gender_female">Female</string>
-
-    <string-array name="abo_rh_array">
-        <item>O-Negative</item>
-        <item>O-Positive</item>
-        <item>A-Negative</item>
-        <item>A-Positive</item>
-        <item>B-Negative</item>
-        <item>B-Positive</item>
-        <item>AB-Negative</item>
-        <item>AB-Positive</item>
-    </string-array>
-
-    <string-array name="military_branch_array">
-        <item>The Army</item>
-        <item>The Marines</item>
-        <item>The Navy</item>
-        <item>The Coast Guard</item>
-        <item>The Air Force</item>
-        <item>The JCS</item>
-    </string-array>
-
-    <string-array name="abo_rh_array_with_no_value">
-        <item>[NO VALUE]</item>
-        <item>O-Negative</item>
-        <item>O-Positive</item>
-        <item>A-Negative</item>
-        <item>A-Positive</item>
-        <item>B-Negative</item>
-        <item>B-Positive</item>
-        <item>AB-Negative</item>
-        <item>AB-Positive</item>
-    </string-array>
+    <string name="search_no_elements">No Urban Dictionary meanings found</string>
+    <string name="meanings_hint_text">Enter Search Term</string>
 
 </resources>

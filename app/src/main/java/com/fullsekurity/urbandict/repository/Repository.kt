@@ -1,11 +1,10 @@
 package com.fullsekurity.urbandict.repository
 
-import android.net.Network
-import android.view.View
-import android.widget.ProgressBar
-import androidx.lifecycle.MutableLiveData
+import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.activity.Callbacks
+import com.fullsekurity.urbandict.activity.MainActivity
 import com.fullsekurity.urbandict.logger.LogUtils
+import com.fullsekurity.urbandict.modal.StandardModal
 import com.fullsekurity.urbandict.repository.network.APIClient
 import com.fullsekurity.urbandict.repository.network.APIInterface
 import com.fullsekurity.urbandict.repository.storage.Meaning
@@ -14,35 +13,42 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-
 class Repository(private val callbacks: Callbacks) {
 
-    private val tag = Repository::class.java.simpleName
-    private val donorsService: APIInterface = APIClient.client
-    private var isMetered: Boolean = false
-    private var cellularNetwork: Network? = null
-    private var wiFiNetwork: Network? = null
-    var isOfflineMode = true
-    val liveViewMeaningList: MutableLiveData<List<Meaning>> = MutableLiveData()
-    var newMeaning: Meaning? = null
-    var newMeaningInProgress = false
+    private val meaningsService: APIInterface = APIClient.client
 
-    fun getUrbanDictionaryMeanings(progressBar: ProgressBar, term: String, showMeanings: (meaningsList: List<Meaning>) -> Unit) {
+    fun getUrbanDictionaryMeanings(term: String, showMeanings: (meaningsList: List<Meaning>?) -> Unit) {
         var disposable: Disposable? = null
-        disposable = donorsService.getMeanings(term)
+        disposable = meaningsService.getMeanings(term)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .timeout(15L, TimeUnit.SECONDS)
-            .subscribe ({ donorResponse ->
+            .subscribe ({ meaningsResponse ->
                 disposable?.dispose()
-                progressBar.visibility = View.GONE
-                showMeanings(donorResponse.list)
+                showMeanings(meaningsResponse.list)
             },
             { throwable ->
                 disposable?.dispose()
-                progressBar.visibility = View.GONE
-                LogUtils.E(LogUtils.FilterTags.withTags(LogUtils.TagFilter.EXC), "getUrbanDictionaryMeanings", throwable)
+                showMeanings(null)
+                getUrbanDictionaryMeaningsFailure(callbacks.fetchActivity(),"getUrbanDictionaryMeanings", throwable)
             })
+    }
+
+    private fun getUrbanDictionaryMeaningsFailure(activity: MainActivity, method: String, throwable: Throwable) {
+        LogUtils.E(LogUtils.FilterTags.withTags(LogUtils.TagFilter.EXC), method, throwable)
+        StandardModal(
+            activity,
+            modalType = StandardModal.ModalType.STANDARD,
+            titleText = activity.getString(R.string.std_modal_urban_dictionary_failure_title),
+            bodyText = activity.getString(R.string.std_modal_urban_dictionary_failure_body),
+            positiveText = activity.getString(R.string.std_modal_ok),
+            dialogFinishedListener = object : StandardModal.DialogFinishedListener {
+                override fun onPositive(string: String) { }
+                override fun onNegative() { }
+                override fun onNeutral() { }
+                override fun onBackPressed() { }
+            }
+        ).show(activity.supportFragmentManager, "MODAL")
     }
 
 }

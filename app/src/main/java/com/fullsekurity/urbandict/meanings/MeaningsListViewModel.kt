@@ -33,7 +33,6 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
     override var adapter: MeaningsAdapter = MeaningsAdapter(callbacks)
     override val itemDecorator: RecyclerView.ItemDecoration? = null
     val listIsVisible: ObservableField<Boolean> = ObservableField(true)
-    val newMeaningVisible: ObservableField<Int> = ObservableField(View.GONE)
     val submitVisible: ObservableField<Int> = ObservableField(View.GONE)
     private var numberOfItemsDisplayed = -1
     var transitionToCreateDonation = true
@@ -63,22 +62,6 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
         }
     }
 
-    private fun showMeanings(meaningsList: List<Meaning>) {
-        LogUtils.D("JIMX", LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("RESPONSE   %s", meaningsList[0].definition))
-        listIsVisible.set(meaningsList.isNotEmpty())
-        adapter.addAll(meaningsList.sortedBy { meaning -> Utils.donorComparisonByString(meaning) })
-        numberOfItemsDisplayed = meaningsList.size
-        setNewMeaningVisibility("NONEMPTY")
-    }
-
-    private fun setNewMeaningVisibility(key: String) {
-        if (key.isNotEmpty() && numberOfItemsDisplayed == 0) {
-            newMeaningVisible.set(View.VISIBLE)
-        } else {
-            newMeaningVisible.set(View.GONE)
-        }
-    }
-
     fun initialize(view: View) {
         val textInputLayout: TextInputLayout = view.findViewById(R.id.edit_text_input_name)
         val textInputEditText: TextInputEditText = view.findViewById(R.id.edit_text_input_name_editText)
@@ -92,23 +75,34 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
     var editTextNameInput: ObservableField<String> = ObservableField("")
     fun onTextNameChanged(key: CharSequence, start: Int, before: Int, count: Int) {
         if (key.isEmpty()) {
-            newMeaningVisible.set(View.GONE)
             submitVisible.set(View.GONE)
             numberOfItemsDisplayed = -1
         } else {
-            setNewMeaningVisibility(key.toString())
             submitVisible.set(View.VISIBLE)
         }
         // within "string", the "count" characters beginning at index "start" have just replaced old text that had length "before"
     }
-    var hintTextName: ObservableField<String> = ObservableField(getApplication<Application>().applicationContext.getString(R.string.donor_search_string))
+    var hintTextName: ObservableField<String> = ObservableField(getApplication<Application>().applicationContext.getString(R.string.meanings_hint_text))
     var editTextNameVisibility: ObservableField<Int> = ObservableField(View.VISIBLE)
 
     fun onSearchClicked(view: View) {
         Utils.hideKeyboard(view)
         val progressBar = callbacks.fetchActivity().getMainProgressBar()
         progressBar.visibility = View.VISIBLE
-        repository.getUrbanDictionaryMeanings(progressBar, editTextNameInput.get() ?: "", this::showMeanings)
+        repository.getUrbanDictionaryMeanings(editTextNameInput.get() ?: "", this::showMeanings)
+    }
+
+    private fun showMeanings(meaningsList: List<Meaning>?) {
+        val progressBar = callbacks.fetchActivity().getMainProgressBar()
+        progressBar.visibility = View.GONE
+        if (meaningsList == null) {
+            listIsVisible.set(false)
+            numberOfItemsDisplayed = -1
+        } else {
+            listIsVisible.set(meaningsList.isNotEmpty())
+            adapter.addAll(meaningsList.sortedBy { meaning -> Utils.donorComparisonByString(meaning) })
+            numberOfItemsDisplayed = meaningsList.size
+        }
     }
 
 }
