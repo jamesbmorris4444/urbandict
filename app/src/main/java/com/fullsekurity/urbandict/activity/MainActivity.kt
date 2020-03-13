@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), Callbacks {
 
     private lateinit var lottieBackgroundView: LottieAnimationView
     private lateinit var activityMainBinding: ActivityMainBinding
+    private var networkStatusMenuItem: MenuItem? = null
 
     enum class UITheme {
         LIGHT, DARK, NOT_ASSIGNED,
@@ -114,6 +115,14 @@ class MainActivity : AppCompatActivity(), Callbacks {
         return wrapDrawable
     }
 
+    private fun setToolbarThumbStatus(resInt: Int) {
+        networkStatusMenuItem?.let { networkStatusMenuItem ->
+            runOnUiThread {
+                networkStatusMenuItem.icon = ContextCompat.getDrawable(this, resInt)
+            }
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_toggle_theme -> {
             if (currentTheme == UITheme.LIGHT) {
@@ -128,10 +137,12 @@ class MainActivity : AppCompatActivity(), Callbacks {
         }
         R.id.action_set_up_sort -> {
             uiViewModel.sortThumbsUp = true
+            setToolbarThumbStatus(R.drawable.ic_thumbsup_dark)
             true
         }
         R.id.action_set_down_sort -> {
             uiViewModel.sortThumbsUp = false
+            setToolbarThumbStatus(R.drawable.ic_thumbsdown_dark)
             true
         }
         else -> {
@@ -141,6 +152,8 @@ class MainActivity : AppCompatActivity(), Callbacks {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
+        networkStatusMenuItem = menu.findItem(R.id.thumb_status)
+        setToolbarThumbStatus(R.drawable.ic_thumbsup_dark)
         return true
     }
 
