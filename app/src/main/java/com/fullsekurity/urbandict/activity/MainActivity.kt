@@ -81,11 +81,18 @@ class MainActivity : AppCompatActivity(), Callbacks {
         toolbar.setNavigationOnClickListener { onBackPressed() }
         lottieBackgroundView = activityMainBinding.root.findViewById(R.id.main_background_lottie)
         loadInitialFragment()
+        getUrbanDictionaryMeanings()
         val settings = getSharedPreferences("THEME", Context.MODE_PRIVATE)
         val name: String? = settings.getString("THEME", UITheme.LIGHT.name)
         if (name != null) {
             currentTheme = UITheme.valueOf(name)
         }
+    }
+
+    private fun getUrbanDictionaryMeanings() {
+        val progressBar = main_progress_bar
+        progressBar.visibility = View.VISIBLE
+        repository.getUrbanDictionaryMeanings(progressBar)
     }
 
     fun loadInitialFragment() {

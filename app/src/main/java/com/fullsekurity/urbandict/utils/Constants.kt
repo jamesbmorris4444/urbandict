@@ -7,7 +7,10 @@ object Constants {
     const val MOVIES_ARRAY_DATA_TAG = "results"
     const val ROOT_FRAGMENT_TAG = "root fragment"
     val DONOR_LIST_CLASS_TYPE = (ArrayList<Donor>()).javaClass
-    const val THEATRE_BLOOD_BASE_URL = "https://api.themoviedb.org/3/discover/"
+    const val URBANDICT_BASE_URL = "https://mashape-community-urban-dictionary.p.rapidapi.com/"
+    const val URBANDICT_RAPID_API_HOST = "x-rapidapi-host: mashape-community-urban-dictionary.p.rapidapi.com"
+    const val URBANDICT_RAPID_API_KEY = "x-rapidapi-key: f674a66b81msh663e5810b0cdd7ep162635jsnb30c4b837dd9"
+    const val URBANDICT_TERM = "term"
     const val IMAGE_URL_PREFIX = "https://image.tmdb.org/t/p/"
     const val SMALL_IMAGE_URL_PREFIX = IMAGE_URL_PREFIX + "w300"
     const val API_KEY_REQUEST_PARAM = "api_key"

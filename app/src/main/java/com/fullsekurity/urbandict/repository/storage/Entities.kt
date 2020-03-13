@@ -4,11 +4,9 @@ import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-@Entity(tableName = "donors")
-data class Donor(
+data class Meaning(
 
-    @PrimaryKey(autoGenerate = true) var id: Long = 0,
-    @ColumnInfo(name = "vote_count") @SerializedName(value = "vote_count") var voteCount: Int = 0,
+    @SerializedName(value = "definition") var definition: String = "",
     @ColumnInfo(name = "video") @SerializedName(value = "video") var video: Boolean = false,
     @ColumnInfo(name = "vote_average") @SerializedName(value = "vote_average") var voteAverage: Float = 0f,
     @ColumnInfo(name = "title") @SerializedName(value = "title") var lastName: String = "",
@@ -23,26 +21,3 @@ data class Donor(
     @Ignore var inReassociate: Boolean = false
 
 ) : Serializable
-
-@Entity(tableName = "products")
-data class Product(
-
-    @PrimaryKey(autoGenerate = true) var id: Long = 0,
-    @ColumnInfo(name = "donor_id") var donorId: Long = 0,
-    @ColumnInfo(name = "din") @SerializedName(value = "din") var din: String = "",
-    @ColumnInfo(name = "abo_rh") @SerializedName(value = "abo_rh") var aboRh: String = "",
-    @ColumnInfo(name = "product_code") @SerializedName(value = "product_code") var productCode: String = "",
-    @ColumnInfo(name = "expiration_date") @SerializedName(value = "expiration_date") var expirationDate: String = "",
-    @Ignore var removedForReassociation: Boolean = false,
-    @Ignore var inReassociate: Boolean = false
-
-)
-
-data class DonorWithProducts(
-    @Embedded val donor: Donor,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "donor_id"
-    )
-    val products: List<Product>
-)

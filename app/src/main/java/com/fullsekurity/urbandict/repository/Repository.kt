@@ -49,28 +49,19 @@ class Repository(private val callbacks: Callbacks) {
     var newDonor: Donor? = null
     var newDonorInProgress = false
 
-    fun setBloodDatabase(context: Context) {
-        val dbList = BloodDatabase.newInstance(context, MAIN_DATABASE_NAME, MODIFIED_DATABASE_NAME)
-        mainBloodDatabase = dbList[0]
-        stagingBloodDatabase = dbList[1]
-    }
-
-    // The code below here refreshes the main donations base
-
-    fun refreshDatabase(progressBar: ProgressBar, activity: MainActivity) {
-
+    fun getUrbanDictionaryMeanings(progressBar: ProgressBar) {
         var disposable: Disposable? = null
-        disposable = donorsService.getDonors(Constants.API_KEY, Constants.LANGUAGE, 13)
+        disposable = donorsService.getMeanings("strong")
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .timeout(15L, TimeUnit.SECONDS)
             .subscribe ({ donorResponse ->
                 disposable?.dispose()
-                initializeDataBase(progressBar, donorResponse.results, donorResponse.products, activity)
+                progressBar.visibility = View.GONE
             },
             { throwable ->
-                progressBar.visibility = View.GONE
                 disposable?.dispose()
+                progressBar.visibility = View.GONE
 
             })
     }

@@ -2,6 +2,7 @@ package com.fullsekurity.urbandict.repository.network
 
 import com.fullsekurity.urbandict.repository.storage.Donor
 import com.fullsekurity.urbandict.repository.storage.Product
+import com.fullsekurity.urbandict.utils.Constants
 import com.fullsekurity.urbandict.utils.Constants.API_KEY_REQUEST_PARAM
 import com.fullsekurity.urbandict.utils.Constants.LANGUAGE_REQUEST_PARAM
 import com.fullsekurity.urbandict.utils.Constants.PAGE_REQUEST_PARAM
@@ -11,22 +12,12 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface APIInterface {
-//    @Headers({
-//        "Accept: application/vnd.yourapi.v1.full+json",
-//        "User-Agent: Your-App-Name"
-//    })
-    @GET("movie")
-    fun getDonors(
-        @Query(API_KEY_REQUEST_PARAM) apiKey: String,
-        @Query(LANGUAGE_REQUEST_PARAM) language: String,
-        @Query(PAGE_REQUEST_PARAM) page: Int
-    ): Observable<DonorResponse>
+    @Headers(
+        Constants.URBANDICT_RAPID_API_HOST,
+        Constants.URBANDICT_RAPID_API_KEY
+    )
+    @GET("define")
+    fun getMeanings(
+        @Query(Constants.URBANDICT_TERM) term: String
+    ): Observable<List<Meaning>>
 }
-
-data class DonorResponse (
-    val page: Int,
-    val totalResults: Int,
-    val totalPages: Int,
-    val results: List<Donor>,
-    val products: List<List<Product>>
-)
