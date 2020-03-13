@@ -17,28 +17,6 @@ import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
 import java.lang.reflect.Field
 
-
-@BindingAdapter("android:picasso_src")
-fun setImageUrl(view: ImageView, url: String?) {
-    if (url != null) {
-        Picasso
-            .get()
-            .load(Constants.SMALL_IMAGE_URL_PREFIX + url)
-            .into(view)
-    }
-}
-
-@BindingAdapter("android:src")
-fun setImageViewResource(imageView: ImageView, resource: Int) {
-    imageView.setImageResource(resource)
-}
-
-@BindingAdapter("background")
-fun setBackground(view: EditText, drawable: Drawable?) {
-    view.background = drawable
-    view.requestLayout()
-}
-
 @BindingAdapter("background_from_res_int")
 fun setBackgroundr(view: EditText, resInt: Int) {
     view.setBackgroundResource(resInt)

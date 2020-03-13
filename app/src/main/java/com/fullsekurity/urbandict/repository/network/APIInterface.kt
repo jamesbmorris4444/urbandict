@@ -2,9 +2,6 @@ package com.fullsekurity.urbandict.repository.network
 
 import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.utils.Constants
-import com.fullsekurity.urbandict.utils.Constants.API_KEY_REQUEST_PARAM
-import com.fullsekurity.urbandict.utils.Constants.LANGUAGE_REQUEST_PARAM
-import com.fullsekurity.urbandict.utils.Constants.PAGE_REQUEST_PARAM
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Headers

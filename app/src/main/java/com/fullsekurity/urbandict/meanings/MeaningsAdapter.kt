@@ -25,11 +25,11 @@ class MeaningsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdap
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeaningsViewHolder {
-        val donateProductsListItemBinding: MeaningsListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.meanings_list_item, parent, false)
+        val meaningsListItemBinding: MeaningsListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.meanings_list_item, parent, false)
         val donateProductsItemViewModel = MeaningsItemViewModel(callbacks)
-        donateProductsListItemBinding.donateProductsItemViewModel = donateProductsItemViewModel
-        donateProductsListItemBinding.uiViewModel = uiViewModel
-        return MeaningsViewHolder(donateProductsListItemBinding.root, donateProductsItemViewModel, donateProductsListItemBinding)
+        meaningsListItemBinding.meaningsItemViewModel = donateProductsItemViewModel
+        meaningsListItemBinding.uiViewModel = uiViewModel
+        return MeaningsViewHolder(meaningsListItemBinding.root, donateProductsItemViewModel, meaningsListItemBinding)
     }
 
     inner class MeaningsViewHolder internal constructor(itemView: View, viewModel: MeaningsItemViewModel, viewDataBinding: MeaningsListItemBinding) :

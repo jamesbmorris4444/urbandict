@@ -48,7 +48,7 @@ class MeaningsFragment : Fragment(), Callbacks {
 
     override fun onResume() {
         super.onResume()
-        (activity as MainActivity).toolbar.title = if (transitionToCreateDonation) Constants.DONATE_PRODUCTS_TITLE else Constants.MANAGE_DONOR_TITLE
+        (activity as MainActivity).toolbar.title = Constants.URBANDICT_TITLE
         donateProductsListViewModel.initialize(binding.root)
     }
 

@@ -7,7 +7,7 @@
                 name="uiViewModel"
                 type="com.fullsekurity.urbandict.ui.UIViewModel" />
         <variable
-                name="donateProductsItemViewModel"
+                name="meaningsItemViewModel"
                 type="com.fullsekurity.urbandict.meanings.MeaningsItemViewModel" />
     </data>
 
@@ -21,7 +21,7 @@
                 android:id="@+id/last_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{donateProductsItemViewModel.lastName}"
+                android:text="@{meaningsItemViewModel.definition}"
                 app:text_font="@{uiViewModel.donorItemTextTypeface}"
                 app:text_color="@{uiViewModel.donorItemTextColor}"
                 app:text_size="@{safeUnbox(uiViewModel.donorItemTextSize)}"
@@ -35,7 +35,7 @@
                 android:id="@+id/first_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{donateProductsItemViewModel.firstName}"
+                android:text="@{meaningsItemViewModel.thumbsUp}"
                 app:text_font="@{uiViewModel.donorItemTextTypeface}"
                 app:text_color="@{uiViewModel.donorItemTextColor}"
                 app:text_size="@{safeUnbox(uiViewModel.donorItemTextSize)}"
@@ -48,7 +48,7 @@
                 android:id="@+id/middle_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{donateProductsItemViewModel.middleName}"
+                android:text="@{meaningsItemViewModel.author}"
                 app:text_font="@{uiViewModel.donorItemTextTypeface}"
                 app:text_color="@{uiViewModel.donorItemTextColor}"
                 app:text_size="@{safeUnbox(uiViewModel.donorItemTextSize)}"
@@ -61,7 +61,7 @@
                 android:id="@+id/date_of_birth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{donateProductsItemViewModel.dob}"
+                android:text="@{meaningsItemViewModel.word}"
                 app:text_font="@{uiViewModel.donorItemTextTypeface}"
                 app:text_color="@{uiViewModel.donorItemTextColor}"
                 app:text_size="@{safeUnbox(uiViewModel.donorItemTextSize)}"
@@ -74,7 +74,7 @@
                 android:id="@+id/abo_rh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{donateProductsItemViewModel.aboRh}"
+                android:text="@{meaningsItemViewModel.example}"
                 app:text_font="@{uiViewModel.donorItemTextTypeface}"
                 app:text_color="@{uiViewModel.donorItemTextColor}"
                 app:text_size="@{safeUnbox(uiViewModel.donorItemTextSize)}"
@@ -87,7 +87,7 @@
                 android:id="@+id/branch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{donateProductsItemViewModel.branch}"
+                android:text="@{meaningsItemViewModel.thumbsDown}"
                 app:text_font="@{uiViewModel.donorItemTextTypeface}"
                 app:text_color="@{uiViewModel.donorItemTextColor}"
                 app:text_size="@{safeUnbox(uiViewModel.donorItemTextSize)}"
