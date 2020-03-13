@@ -1,14 +1,12 @@
-package com.fullsekurity.urbandict.donateproducts
+package com.fullsekurity.urbandict.meanings
 
-import android.view.View
 import androidx.databinding.ObservableField
 import com.fullsekurity.urbandict.activity.Callbacks
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewItemViewModel
 import com.fullsekurity.urbandict.repository.storage.Meaning
-import com.fullsekurity.urbandict.utils.Utils
 
 @Suppress("UNCHECKED_CAST")
-class DonateProductsItemViewModel(private val callbacks: Callbacks) : RecyclerViewItemViewModel<Meaning>() {
+class MeaningsItemViewModel(private val callbacks: Callbacks) : RecyclerViewItemViewModel<Meaning>() {
 
     private lateinit var donor: Meaning
 

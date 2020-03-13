@@ -8,7 +8,7 @@
                 type="com.fullsekurity.urbandict.ui.UIViewModel" />
         <variable
                 name="donateProductsItemViewModel"
-                type="com.fullsekurity.urbandict.donateproducts.DonateProductsItemViewModel" />
+                type="com.fullsekurity.urbandict.meanings.MeaningsItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

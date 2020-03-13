@@ -11,7 +11,7 @@
 
         <variable
             name="donateProductsListViewModel"
-            type="com.fullsekurity.urbandict.donateproducts.DonateProductsListViewModel" />
+            type="com.fullsekurity.urbandict.meanings.DonateProductsListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

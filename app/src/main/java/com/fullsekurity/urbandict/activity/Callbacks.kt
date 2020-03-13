@@ -1,8 +1,7 @@
 package com.fullsekurity.urbandict.activity
 
 import android.view.View
-import com.fullsekurity.urbandict.activity.MainActivity
-import com.fullsekurity.urbandict.donateproducts.DonateProductsListViewModel
+import com.fullsekurity.urbandict.meanings.DonateProductsListViewModel
 
 interface Callbacks {
     fun fetchActivity(): MainActivity

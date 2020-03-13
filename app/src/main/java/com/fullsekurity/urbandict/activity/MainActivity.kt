@@ -1,8 +1,6 @@
 package com.fullsekurity.urbandict.activity
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
@@ -12,32 +10,22 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.RadioButton
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.airbnb.lottie.*
 import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.databinding.ActivityMainBinding
-import com.fullsekurity.urbandict.donateproducts.DonateProductsFragment
-import com.fullsekurity.urbandict.donateproducts.DonateProductsListViewModel
-import com.fullsekurity.urbandict.logger.LogUtils
-import com.fullsekurity.urbandict.logger.LogUtils.TagFilter.LOT
+import com.fullsekurity.urbandict.meanings.MeaningsFragment
+import com.fullsekurity.urbandict.meanings.DonateProductsListViewModel
 import com.fullsekurity.urbandict.repository.Repository
-import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.ui.UIViewModel
 import com.fullsekurity.urbandict.utils.Constants.ROOT_FRAGMENT_TAG
 import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
-import com.fullsekurity.urbandict.utils.Utils
 import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
-import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -101,7 +89,7 @@ class MainActivity : AppCompatActivity(), Callbacks {
     fun loadDonateProductsFragment() {
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-            .replace(R.id.main_activity_container, DonateProductsFragment.newInstance())
+            .replace(R.id.main_activity_container, MeaningsFragment.newInstance())
             .commitAllowingStateLoss()
     }
 

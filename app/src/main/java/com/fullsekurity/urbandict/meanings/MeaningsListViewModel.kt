@@ -1,4 +1,4 @@
-package com.fullsekurity.urbandict.donateproducts
+package com.fullsekurity.urbandict.meanings
 
 import android.app.Application
 import android.view.View
@@ -19,7 +19,6 @@ import com.fullsekurity.urbandict.utils.Utils
 import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class DonateProductsListViewModelFactory(private val callbacks: Callbacks) : ViewModelProvider.Factory {
@@ -31,7 +30,7 @@ class DonateProductsListViewModelFactory(private val callbacks: Callbacks) : Vie
 class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerViewViewModel(callbacks.fetchActivity().application) {
 
     private val tag = DonateProductsListViewModel::class.java.simpleName
-    override var adapter: DonateProductsAdapter = DonateProductsAdapter(callbacks)
+    override var adapter: MeaningsAdapter = MeaningsAdapter(callbacks)
     override val itemDecorator: RecyclerView.ItemDecoration? = null
     val listIsVisible: ObservableField<Boolean> = ObservableField(true)
     val newMeaningVisible: ObservableField<Int> = ObservableField(View.GONE)

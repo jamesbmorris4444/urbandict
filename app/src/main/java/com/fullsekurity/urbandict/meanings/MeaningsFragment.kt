@@ -1,12 +1,10 @@
-package com.fullsekurity.urbandict.donateproducts
+package com.fullsekurity.urbandict.meanings
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.Spinner
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -15,7 +13,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.activity.Callbacks
 import com.fullsekurity.urbandict.activity.MainActivity
-import com.fullsekurity.urbandict.databinding.DonateProductsFragmentBinding
+import com.fullsekurity.urbandict.databinding.MeaningsFragmentBinding
 import com.fullsekurity.urbandict.ui.UIViewModel
 import com.fullsekurity.urbandict.utils.Constants
 import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
@@ -23,17 +21,17 @@ import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class DonateProductsFragment : Fragment(), Callbacks {
+class MeaningsFragment : Fragment(), Callbacks {
 
     private lateinit var donateProductsListViewModel: DonateProductsListViewModel
     private lateinit var lottieBackgroundView: LottieAnimationView
-    private lateinit var binding: DonateProductsFragmentBinding
+    private lateinit var binding: MeaningsFragmentBinding
     private lateinit var mainActivity: MainActivity
     private var transitionToCreateDonation = true
 
     companion object {
-        fun newInstance(): DonateProductsFragment {
-            return DonateProductsFragment()
+        fun newInstance(): MeaningsFragment {
+            return MeaningsFragment()
         }
     }
 
@@ -55,7 +53,7 @@ class DonateProductsFragment : Fragment(), Callbacks {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.donate_products_fragment, container, false) as DonateProductsFragmentBinding
+        binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.meanings_fragment, container, false) as MeaningsFragmentBinding
         binding.lifecycleOwner = this
         donateProductsListViewModel = ViewModelProvider(this, DonateProductsListViewModelFactory(this)).get(DonateProductsListViewModel::class.java)
         binding.donateProductsListViewModel = donateProductsListViewModel

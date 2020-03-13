@@ -1,4 +1,4 @@
-package com.fullsekurity.urbandict.donateproducts
+package com.fullsekurity.urbandict.meanings
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.fullsekurity.urbandict.R
-import com.fullsekurity.urbandict.databinding.DonateProductsListItemBinding
+import com.fullsekurity.urbandict.databinding.MeaningsListItemBinding
 import com.fullsekurity.urbandict.activity.Callbacks
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewFilterAdapter
 import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.ui.UIViewModel
-import com.fullsekurity.urbandict.utils.Utils
 
-class DonateProductsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdapter<Meaning, DonateProductsItemViewModel>() {
+class MeaningsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdapter<Meaning, MeaningsItemViewModel>() {
 
     private var adapterFilter: AdapterFilter? = null
     lateinit var uiViewModel: UIViewModel
@@ -26,17 +25,17 @@ class DonateProductsAdapter(private val callbacks: Callbacks) : RecyclerViewFilt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeaningsViewHolder {
-        val donateProductsListItemBinding: DonateProductsListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.donate_products_list_item, parent, false)
-        val donateProductsItemViewModel = DonateProductsItemViewModel(callbacks)
+        val donateProductsListItemBinding: MeaningsListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.meanings_list_item, parent, false)
+        val donateProductsItemViewModel = MeaningsItemViewModel(callbacks)
         donateProductsListItemBinding.donateProductsItemViewModel = donateProductsItemViewModel
         donateProductsListItemBinding.uiViewModel = uiViewModel
         return MeaningsViewHolder(donateProductsListItemBinding.root, donateProductsItemViewModel, donateProductsListItemBinding)
     }
 
-    inner class MeaningsViewHolder internal constructor(itemView: View, viewModel: DonateProductsItemViewModel, viewDataBinding: DonateProductsListItemBinding) :
-        ItemViewHolder<Meaning, DonateProductsItemViewModel> (itemView, viewModel, viewDataBinding)
+    inner class MeaningsViewHolder internal constructor(itemView: View, viewModel: MeaningsItemViewModel, viewDataBinding: MeaningsListItemBinding) :
+        ItemViewHolder<Meaning, MeaningsItemViewModel> (itemView, viewModel, viewDataBinding)
 
-    override fun onBindViewHolder(holder: ItemViewHolder<Meaning, DonateProductsItemViewModel>, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder<Meaning, MeaningsItemViewModel>, position: Int) {
         super.onBindViewHolder(holder, position)
         if (position % 2 == 1) {
             holder.itemView.setBackgroundColor(Color.parseColor(uiViewModel.recyclerViewAlternatingColor1))
