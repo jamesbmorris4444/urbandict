@@ -5,4 +5,14 @@
             android:title="@string/action_toggle_themes"
             app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/action_set_up_sort"
+        android:title="@string/action_set_up_sort"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_set_down_sort"
+        android:title="@string/action_set_down_sort"
+        app:showAsAction="never"/>
+
 </menu>

@@ -111,6 +111,9 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
     val donorItemTextColor: ObservableField<String> = ObservableField("#ffffff")
     val donorItemTextSize: ObservableField<Float> = ObservableField(0f)
     val donorItemTextTypeface: ObservableField<String> = ObservableField("")
+    val wordItemTextColor: ObservableField<String> = ObservableField("#ffffff")
+    val wordItemTextSize: ObservableField<Float> = ObservableField(0f)
+    val wordItemTextTypeface: ObservableField<String> = ObservableField("")
 
     val largeErrorTextColor: ObservableField<String> = ObservableField("#ffffff")
     val largeErrorTextSize: ObservableField<Float> = ObservableField(0f)
@@ -146,6 +149,9 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
     val dropdownTextColor: ObservableField<String> = ObservableField("#ffffff")
     val dropdownTextSize: ObservableField<Float> = ObservableField(0f)
     val dropdownTextTypeface: ObservableField<String> = ObservableField("")
+
+    val thumbsUp: ObservableField<Drawable> = ObservableField()
+    val thumbsDown: ObservableField<Drawable> = ObservableField()
 
     // computed values
 
@@ -195,6 +201,7 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
     lateinit var primaryColor: String
     lateinit var secondaryColor: String
     lateinit var toolbarTextColor: String
+    var sortThumbsUp = true
 
     init {
         DaggerMapperDependencyInjector.builder()
@@ -366,6 +373,9 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
             donorItemTextColor.set(colorMapper.map(theme, uiDataClass.donorItemTextColor))
             donorItemTextSize.set(textSizeMapper.map(theme, uiDataClass.donorItemTextSize))
             donorItemTextTypeface.set(typefaceMapper.map(theme, uiDataClass.donorItemTextSize))
+            wordItemTextColor.set(colorMapper.map(theme, uiDataClass.wordItemTextColor))
+            wordItemTextSize.set(textSizeMapper.map(theme, uiDataClass.wordItemTextSize))
+            wordItemTextTypeface.set(typefaceMapper.map(theme, uiDataClass.wordItemTextSize))
 
             largeErrorTextColor.set(colorMapper.map(theme, uiDataClass.largeErrorTextColor))
             largeErrorTextSize.set(textSizeMapper.map(theme, uiDataClass.largeErrorTextSize))
@@ -401,6 +411,9 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
             dropdownTextColor.set(colorMapper.map(theme, uiDataClass.dropdownTextColor))
             dropdownTextSize.set(textSizeMapper.map(theme, uiDataClass.dropdownTextSize))
             dropdownTextTypeface.set(typefaceMapper.map(theme, uiDataClass.dropdownTextSize))
+
+            thumbsUp.set(ContextCompat.getDrawable(context, uiDataClass.thumbsUp))
+            thumbsDown.set(ContextCompat.getDrawable(context, uiDataClass.thumbsDown))
         }
     }
 

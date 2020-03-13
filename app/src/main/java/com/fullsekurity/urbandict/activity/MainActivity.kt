@@ -20,7 +20,7 @@ import com.airbnb.lottie.*
 import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.databinding.ActivityMainBinding
 import com.fullsekurity.urbandict.meanings.MeaningsFragment
-import com.fullsekurity.urbandict.meanings.DonateProductsListViewModel
+import com.fullsekurity.urbandict.meanings.MeaningsListViewModel
 import com.fullsekurity.urbandict.repository.Repository
 import com.fullsekurity.urbandict.ui.UIViewModel
 import com.fullsekurity.urbandict.utils.Constants.ROOT_FRAGMENT_TAG
@@ -128,6 +128,14 @@ class MainActivity : AppCompatActivity(), Callbacks {
             setupToolbar()
             true
         }
+        R.id.action_set_up_sort -> {
+            uiViewModel.sortThumbsUp = true
+            true
+        }
+        R.id.action_set_down_sort -> {
+            uiViewModel.sortThumbsUp = false
+            true
+        }
         else -> {
             super.onOptionsItemSelected(item)
         }
@@ -146,6 +154,6 @@ class MainActivity : AppCompatActivity(), Callbacks {
         return activityMainBinding.root
     }
 
-    override fun fetchDonateProductsListViewModel() : DonateProductsListViewModel? { return null }
+    override fun fetchDonateProductsListViewModel() : MeaningsListViewModel? { return null }
 
 }

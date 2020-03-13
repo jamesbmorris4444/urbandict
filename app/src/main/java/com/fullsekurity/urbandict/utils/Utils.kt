@@ -24,9 +24,12 @@ class Utils {
 //            return donor.lastName == otherMeaning.lastName && donor.firstName == otherMeaning.firstName && donor.middleName == otherMeaning.middleName && donor.dob == otherMeaning.dob
 //        }
 
-        fun donorComparisonByString(donor: Meaning): String {
-            return ""
-//            return donor.lastName + "," + donor.firstName + "," + donor.middleName + "," + donor.dob
+        fun donorComparisonByThumbsUp(meaning: Meaning): Int {
+            return meaning.thumbsUp
+        }
+
+        fun donorComparisonByThumbsDown(meaning: Meaning): Int {
+            return meaning.thumbsDown
         }
 
         fun newPatternOfSubpatterns(patternOfSubpatterns: String, index: Int, newPattern: String): String {

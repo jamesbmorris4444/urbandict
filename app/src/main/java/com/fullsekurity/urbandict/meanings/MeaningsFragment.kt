@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 class MeaningsFragment : Fragment(), Callbacks {
 
-    private lateinit var donateProductsListViewModel: DonateProductsListViewModel
+    private lateinit var meaningsListViewModel: MeaningsListViewModel
     private lateinit var lottieBackgroundView: LottieAnimationView
     private lateinit var binding: MeaningsFragmentBinding
     private lateinit var mainActivity: MainActivity
@@ -49,16 +49,16 @@ class MeaningsFragment : Fragment(), Callbacks {
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).toolbar.title = Constants.URBANDICT_TITLE
-        donateProductsListViewModel.initialize(binding.root)
+        meaningsListViewModel.initialize(binding.root)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.meanings_fragment, container, false) as MeaningsFragmentBinding
         binding.lifecycleOwner = this
-        donateProductsListViewModel = ViewModelProvider(this, DonateProductsListViewModelFactory(this)).get(DonateProductsListViewModel::class.java)
-        binding.donateProductsListViewModel = donateProductsListViewModel
+        meaningsListViewModel = ViewModelProvider(this, MeaningsListViewModelFactory(this)).get(MeaningsListViewModel::class.java)
+        binding.donateProductsListViewModel = meaningsListViewModel
         binding.uiViewModel = uiViewModel
-        donateProductsListViewModel.transitionToCreateDonation = transitionToCreateDonation
+        meaningsListViewModel.transitionToCreateDonation = transitionToCreateDonation
         uiViewModel.currentTheme = (activity as MainActivity).currentTheme
         //lottieBackgroundView = binding.root.findViewById(R.id.background_lottie)
         //uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
@@ -87,8 +87,8 @@ class MeaningsFragment : Fragment(), Callbacks {
         return binding.root
     }
 
-    override fun fetchDonateProductsListViewModel() : DonateProductsListViewModel? {
-        return donateProductsListViewModel
+    override fun fetchDonateProductsListViewModel() : MeaningsListViewModel? {
+        return meaningsListViewModel
     }
 
 }

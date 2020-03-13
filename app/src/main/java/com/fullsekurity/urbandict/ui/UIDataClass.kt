@@ -65,6 +65,8 @@ class UIDataClass(
 
     val donorItemTextColor: String,                       // Meaning item text color
     val donorItemTextSize: String,                        // Meaning item text size
+    val wordItemTextColor: String,                        // Meaning word item text color
+    val wordItemTextSize: String,                         // Meaning word item text size
 
     val largeErrorTextColor: String,                      // Standard large error text color
     val largeErrorTextSize: String,                       // Standard large error text size
@@ -89,9 +91,12 @@ class UIDataClass(
     val productIdTextColor: String,                       // Product grid id label text color
     val productIdTextSize: String,                        // Product grid id label text size
 
-    val incorrectMeaningTextColor: String,                  // Reassociate donor label text color
-    val incorrectMeaningTextSize: String,                   // Reassociate donor label text size
+    val incorrectMeaningTextColor: String,                // Reassociate donor label text color
+    val incorrectMeaningTextSize: String,                 // Reassociate donor label text size
 
     val dropdownTextColor: String,                        // aboRh/branch dropdown label text color
-    val dropdownTextSize: String                          // aboRh/branch dropdown label text size
+    val dropdownTextSize: String,                         // aboRh/branch dropdown label text size
+
+    val thumbsUp: Int,                                    // thumbs up drawable
+    val thumbsDown: Int                                   // thumbs down drawable
 )

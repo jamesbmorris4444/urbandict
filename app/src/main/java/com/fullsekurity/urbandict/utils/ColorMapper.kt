@@ -31,7 +31,7 @@ class ColorMapper @Inject constructor() {
     enum class DarkColors(var colorName: String, val colorValue: String) {
         PRIMARY("primary", "#191970"),
         SECONDARY("secondary", "#e50239"),
-        SUCCESS("success", "00ff00"),
+        SUCCESS("success", "#00ff00"),
         WARNING("warning", "#ff9900"),
         ERROR("error", "#E40449"),
         WHITE("white", "#ffffff"),

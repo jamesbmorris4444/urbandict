@@ -72,6 +72,8 @@ class UIDataModel {
 
                         "black",
                         "largeTextBold",
+                        "success",
+                        "mainTitleBold",
 
                         "error",
                         "mainTitle",
@@ -100,7 +102,10 @@ class UIDataModel {
                         "mainTitleBold",
 
                         "primary",
-                        "subTitle"
+                        "subTitle",
+
+                        R.drawable.ic_thumbsup_light,
+                        R.drawable.ic_thumbsdown_light
                     )
                 }
                 lightViewUIDataClass
@@ -169,6 +174,8 @@ class UIDataModel {
 
                         "white",
                         "largeText",
+                        "success",
+                        "mainTitleBold",
 
                         "error",
                         "mainTitle",
@@ -197,7 +204,10 @@ class UIDataModel {
                         "mainTitleBold",
 
                         "white",
-                        "subTitle"
+                        "subTitle",
+
+                        R.drawable.ic_thumbsup_dark,
+                        R.drawable.ic_thumbsdown_dark
                     )
                 }
                 darkViewUIDataClass

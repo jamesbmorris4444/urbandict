@@ -3,7 +3,10 @@
 
     <!-- toolbar overflow menu actions -->
     <string name="action_toggle_themes">Change Theme</string>
+    <string name="action_set_up_sort">Sort Thumbs Up</string>
+    <string name="action_set_down_sort">Sort Thumbs Down</string>
 
+    toggle_themes"
     <!-- standard modals -->
     <string name="std_modal_urban_dictionary_failure_title">Timeout or Error in Search</string>
     <string name="std_modal_urban_dictionary_failure_body">Please try a search again or check your network connection to ensure you are connected</string>

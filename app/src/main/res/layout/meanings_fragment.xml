@@ -11,7 +11,7 @@
 
         <variable
             name="donateProductsListViewModel"
-            type="com.fullsekurity.urbandict.meanings.DonateProductsListViewModel" />
+            type="com.fullsekurity.urbandict.meanings.MeaningsListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +111,8 @@
                 android:clipToPadding="false"
                 app:recyclerViewViewModel="@{donateProductsListViewModel}"
                 app:layout_constraintTop_toBottomOf="@+id/top_divider"
-                app:layout_constraintLeft_toLeftOf="parent" />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
 
         <android.widget.TextView
                 android:id="@+id/search_no_elements_found"

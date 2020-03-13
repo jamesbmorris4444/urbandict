@@ -1,8 +1,11 @@
 package com.fullsekurity.urbandict.repository.storage
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
+@Parcelize
 data class Meaning(
 
     @SerializedName(value = "definition") var definition: String = "",
@@ -17,4 +20,4 @@ data class Meaning(
     @SerializedName(value = "example") var example: String = "",
     @SerializedName(value = "thumbs_down") var thumbsDown: Int = 0
 
-) : Serializable
+) : Parcelable

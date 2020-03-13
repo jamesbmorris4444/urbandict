@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.activity.Callbacks
-import com.fullsekurity.urbandict.logger.LogUtils
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewViewModel
 import com.fullsekurity.urbandict.repository.Repository
 import com.fullsekurity.urbandict.repository.storage.Meaning
@@ -21,15 +20,15 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import javax.inject.Inject
 
-class DonateProductsListViewModelFactory(private val callbacks: Callbacks) : ViewModelProvider.Factory {
+class MeaningsListViewModelFactory(private val callbacks: Callbacks) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return DonateProductsListViewModel(callbacks) as T
+        return MeaningsListViewModel(callbacks) as T
     }
 }
 
-class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerViewViewModel(callbacks.fetchActivity().application) {
+class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewViewModel(callbacks.fetchActivity().application) {
 
-    private val tag = DonateProductsListViewModel::class.java.simpleName
+    private val tag = MeaningsListViewModel::class.java.simpleName
     override var adapter: MeaningsAdapter = MeaningsAdapter(callbacks)
     override val itemDecorator: RecyclerView.ItemDecoration? = null
     val listIsVisible: ObservableField<Boolean> = ObservableField(true)
@@ -100,7 +99,11 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
             numberOfItemsDisplayed = -1
         } else {
             listIsVisible.set(meaningsList.isNotEmpty())
-            adapter.addAll(meaningsList.sortedBy { meaning -> Utils.donorComparisonByString(meaning) })
+            if (uiViewModel.sortThumbsUp) {
+                adapter.addAll(meaningsList.sortedByDescending { meaning -> Utils.donorComparisonByThumbsUp(meaning) })
+            } else {
+                adapter.addAll(meaningsList.sortedByDescending { meaning -> Utils.donorComparisonByThumbsDown(meaning) })
+            }
             numberOfItemsDisplayed = meaningsList.size
         }
     }
