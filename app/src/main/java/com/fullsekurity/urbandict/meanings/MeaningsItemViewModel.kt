@@ -13,8 +13,6 @@ import java.util.*
 @Suppress("UNCHECKED_CAST")
 class MeaningsItemViewModel(private val callbacks: Callbacks) : RecyclerViewItemViewModel<Meaning>() {
 
-    private var dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-
     val definition: ObservableField<String> = ObservableField("")
     val permalink: ObservableField<String> = ObservableField("")
     val thumbsUp: ObservableField<String> = ObservableField("")

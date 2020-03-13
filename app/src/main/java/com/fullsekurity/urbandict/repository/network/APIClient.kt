@@ -7,13 +7,9 @@ import com.fullsekurity.urbandict.utils.Constants.URBANDICT_BASE_URL
 import com.google.gson.GsonBuilder
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
-import org.json.JSONArray
-import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
-import java.util.*
 
 object APIClient {
     val client: APIInterface
@@ -23,7 +19,7 @@ object APIClient {
                     LogUtils.D(APIClient::class.java.simpleName, LogUtils.FilterTags.withTags(API), String.format("okHttp logging interceptor=%s", message))
                 }
             })
-            interceptor.level = HttpLoggingInterceptor.Level.BODY  // or BODY
+            interceptor.level = HttpLoggingInterceptor.Level.BASIC  // BASIC or BODY
             val client = OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .build()

@@ -20,10 +20,6 @@ class Utils {
             inputManager.showSoftInput(view, InputMethodManager.SHOW_FORCED)
         }
 
-//        fun donorEquals(donor: Meaning, otherMeaning: Meaning): Boolean {
-//            return donor.lastName == otherMeaning.lastName && donor.firstName == otherMeaning.firstName && donor.middleName == otherMeaning.middleName && donor.dob == otherMeaning.dob
-//        }
-
         fun donorComparisonByThumbsUp(meaning: Meaning): Int {
             return meaning.thumbsUp
         }

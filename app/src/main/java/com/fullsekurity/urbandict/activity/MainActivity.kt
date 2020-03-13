@@ -33,8 +33,6 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), Callbacks {
 
-    private val tag = MainActivity::class.java.simpleName
-
     lateinit var repository: Repository
     @Inject
     lateinit var uiViewModel: UIViewModel
@@ -81,12 +79,12 @@ class MainActivity : AppCompatActivity(), Callbacks {
         return main_progress_bar
     }
 
-    fun loadInitialFragment() {
+    private fun loadInitialFragment() {
         supportFragmentManager.popBackStack(ROOT_FRAGMENT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        loadDonateProductsFragment()
+        loadMeaningsFragment()
     }
 
-    fun loadDonateProductsFragment() {
+    private fun loadMeaningsFragment() {
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
             .replace(R.id.main_activity_container, MeaningsFragment.newInstance())
