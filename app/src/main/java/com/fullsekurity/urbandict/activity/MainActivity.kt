@@ -133,18 +133,6 @@ class MainActivity : AppCompatActivity(), Callbacks {
             setupToolbar()
             true
         }
-        R.id.action_settings -> {
-            true
-        }
-        R.id.action_favorite -> {
-            true
-        }
-        R.id.action_staging_count -> {
-            true
-        }
-        R.id.network_status -> {
-            true
-        }
         else -> {
             super.onOptionsItemSelected(item)
         }

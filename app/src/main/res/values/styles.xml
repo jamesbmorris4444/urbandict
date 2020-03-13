@@ -46,14 +46,6 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <!-- DatePicker styles are used for the color areas in the calendar for a DatePicker -->
-    <style name="DatePickerDialogThemeForLight" parent="android:Theme.Material.Light.Dialog">
-        <item name="android:colorAccent">@color/lightPrimary</item>
-    </style>
-
-    <style name="DatePickerDialogThemeForDark" parent="android:Theme.Material.Light.Dialog">
-        <item name="android:colorAccent">@color/darkPrimary</item>
-    </style>
     <!-- end styles used in theming, uiViewModel should select on of these two styles based on the theme -->
 
 </resources>

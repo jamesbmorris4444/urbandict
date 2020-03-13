@@ -7,9 +7,14 @@ import com.fullsekurity.urbandict.utils.Constants.LANGUAGE_REQUEST_PARAM
 import com.fullsekurity.urbandict.utils.Constants.PAGE_REQUEST_PARAM
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface APIInterface {
+//    @Headers({
+//        "Accept: application/vnd.yourapi.v1.full+json",
+//        "User-Agent: Your-App-Name"
+//    })
     @GET("movie")
     fun getDonors(
         @Query(API_KEY_REQUEST_PARAM) apiKey: String,
