@@ -18,5 +18,9 @@ interface APIInterface {
     @GET("define")
     fun getMeanings(
         @Query(Constants.URBANDICT_TERM) term: String
-    ): Observable<List<Meaning>>
+    ): Observable<MeaningsResponse>
 }
+
+data class MeaningsResponse (
+    val list: List<Meaning>
+)

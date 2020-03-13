@@ -27,16 +27,16 @@ class Repository(private val callbacks: Callbacks) {
     var newMeaning: Meaning? = null
     var newMeaningInProgress = false
 
-    fun getUrbanDictionaryMeanings(progressBar: ProgressBar) {
+    fun getUrbanDictionaryMeanings(progressBar: ProgressBar, term: String, showMeanings: (meaningsList: List<Meaning>) -> Unit) {
         var disposable: Disposable? = null
-        disposable = donorsService.getMeanings("strong")
+        disposable = donorsService.getMeanings(term)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .timeout(15L, TimeUnit.SECONDS)
             .subscribe ({ donorResponse ->
                 disposable?.dispose()
                 progressBar.visibility = View.GONE
-                LogUtils.D("JIMX", LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("RESPONSE   %s", donorResponse[0].definition))
+                showMeanings(donorResponse.list)
             },
             { throwable ->
                 disposable?.dispose()

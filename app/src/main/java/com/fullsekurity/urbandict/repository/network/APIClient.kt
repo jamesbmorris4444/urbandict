@@ -2,7 +2,7 @@ package com.fullsekurity.urbandict.repository.network
 
 import com.fullsekurity.urbandict.logger.LogUtils
 import com.fullsekurity.urbandict.logger.LogUtils.TagFilter.API
-import com.fullsekurity.urbandict.utils.Constants.DONOR_LIST_CLASS_TYPE
+import com.fullsekurity.urbandict.utils.Constants.URBANDICT_LIST_CLASS_TYPE
 import com.fullsekurity.urbandict.utils.Constants.URBANDICT_BASE_URL
 import com.google.gson.GsonBuilder
 import okhttp3.*
@@ -28,7 +28,7 @@ object APIClient {
                 .addInterceptor(interceptor)
                 .build()
             val gson = GsonBuilder()
-                .registerTypeAdapter(DONOR_LIST_CLASS_TYPE,
+                .registerTypeAdapter(URBANDICT_LIST_CLASS_TYPE,
                     MeaningsJsonDeserializer()
                 )
                 .create()

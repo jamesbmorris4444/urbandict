@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.activity.Callbacks
+import com.fullsekurity.urbandict.logger.LogUtils
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewViewModel
 import com.fullsekurity.urbandict.repository.Repository
 import com.fullsekurity.urbandict.repository.storage.Meaning
@@ -18,6 +19,7 @@ import com.fullsekurity.urbandict.utils.Utils
 import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class DonateProductsListViewModelFactory(private val callbacks: Callbacks) : ViewModelProvider.Factory {
@@ -62,10 +64,11 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
         }
     }
 
-    private fun showMeanings(donorList: List<Meaning>) {
-        listIsVisible.set(donorList.isNotEmpty())
-        adapter.addAll(donorList.sortedBy { donor -> Utils.donorComparisonByString(donor) })
-        numberOfItemsDisplayed = donorList.size
+    private fun showMeanings(meaningsList: List<Meaning>) {
+        LogUtils.D("JIMX", LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("RESPONSE   %s", meaningsList[0].definition))
+        listIsVisible.set(meaningsList.isNotEmpty())
+        adapter.addAll(meaningsList.sortedBy { meaning -> Utils.donorComparisonByString(meaning) })
+        numberOfItemsDisplayed = meaningsList.size
         setNewMeaningVisibility("NONEMPTY")
     }
 
@@ -104,7 +107,9 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
 
     fun onSearchClicked(view: View) {
         Utils.hideKeyboard(view)
-        //repository.handleSearchClick(view, editTextNameInput.get() ?: "", this::showMeanings)
+        val progressBar = callbacks.fetchActivity().getMainProgressBar()
+        progressBar.visibility = View.VISIBLE
+        repository.getUrbanDictionaryMeanings(progressBar, editTextNameInput.get() ?: "", this::showMeanings)
     }
 
 }

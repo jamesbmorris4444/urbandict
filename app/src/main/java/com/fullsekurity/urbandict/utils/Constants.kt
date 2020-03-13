@@ -4,9 +4,9 @@ import com.fullsekurity.urbandict.repository.storage.Meaning
 
 object Constants {
 
-    const val MOVIES_ARRAY_DATA_TAG = "list"
+    const val URBANDICT_ARRAY_DATA_TAG = "list"
     const val ROOT_FRAGMENT_TAG = "root fragment"
-    val DONOR_LIST_CLASS_TYPE = (ArrayList<Meaning>()).javaClass
+    val URBANDICT_LIST_CLASS_TYPE = (ArrayList<Meaning>()).javaClass
     const val URBANDICT_BASE_URL = "https://mashape-community-urban-dictionary.p.rapidapi.com/"
     const val URBANDICT_RAPID_API_HOST = "x-rapidapi-host: mashape-community-urban-dictionary.p.rapidapi.com"
     const val URBANDICT_RAPID_API_KEY = "x-rapidapi-key: f674a66b81msh663e5810b0cdd7ep162635jsnb30c4b837dd9"
