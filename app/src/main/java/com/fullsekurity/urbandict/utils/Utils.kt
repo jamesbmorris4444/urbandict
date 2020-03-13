@@ -3,7 +3,7 @@ package com.fullsekurity.urbandict.utils
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.fullsekurity.urbandict.repository.storage.Donor
+import com.fullsekurity.urbandict.repository.storage.Meaning
 
 class Utils {
 
@@ -20,12 +20,13 @@ class Utils {
             inputManager.showSoftInput(view, InputMethodManager.SHOW_FORCED)
         }
 
-        fun donorEquals(donor: Donor, otherDonor: Donor): Boolean {
-            return donor.lastName == otherDonor.lastName && donor.firstName == otherDonor.firstName && donor.middleName == otherDonor.middleName && donor.dob == otherDonor.dob
-        }
+//        fun donorEquals(donor: Meaning, otherMeaning: Meaning): Boolean {
+//            return donor.lastName == otherMeaning.lastName && donor.firstName == otherMeaning.firstName && donor.middleName == otherMeaning.middleName && donor.dob == otherMeaning.dob
+//        }
 
-        fun donorComparisonByString(donor: Donor): String {
-            return donor.lastName + "," + donor.firstName + "," + donor.middleName + "," + donor.dob
+        fun donorComparisonByString(donor: Meaning): String {
+            return ""
+//            return donor.lastName + "," + donor.firstName + "," + donor.middleName + "," + donor.dob
         }
 
         fun newPatternOfSubpatterns(patternOfSubpatterns: String, index: Int, newPattern: String): String {

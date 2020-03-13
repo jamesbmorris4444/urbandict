@@ -29,7 +29,7 @@ object APIClient {
                 .build()
             val gson = GsonBuilder()
                 .registerTypeAdapter(DONOR_LIST_CLASS_TYPE,
-                    DonorsJsonDeserializer()
+                    MeaningsJsonDeserializer()
                 )
                 .create()
             val builder = Retrofit.Builder()

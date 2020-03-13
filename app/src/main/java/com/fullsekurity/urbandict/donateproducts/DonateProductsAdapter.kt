@@ -9,11 +9,11 @@ import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.databinding.DonateProductsListItemBinding
 import com.fullsekurity.urbandict.activity.Callbacks
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewFilterAdapter
-import com.fullsekurity.urbandict.repository.storage.Donor
+import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.ui.UIViewModel
 import com.fullsekurity.urbandict.utils.Utils
 
-class DonateProductsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdapter<Donor, DonateProductsItemViewModel>() {
+class DonateProductsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdapter<Meaning, DonateProductsItemViewModel>() {
 
     private var adapterFilter: AdapterFilter? = null
     lateinit var uiViewModel: UIViewModel
@@ -25,18 +25,18 @@ class DonateProductsAdapter(private val callbacks: Callbacks) : RecyclerViewFilt
         return AdapterFilter()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DonorsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeaningsViewHolder {
         val donateProductsListItemBinding: DonateProductsListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.donate_products_list_item, parent, false)
         val donateProductsItemViewModel = DonateProductsItemViewModel(callbacks)
         donateProductsListItemBinding.donateProductsItemViewModel = donateProductsItemViewModel
         donateProductsListItemBinding.uiViewModel = uiViewModel
-        return DonorsViewHolder(donateProductsListItemBinding.root, donateProductsItemViewModel, donateProductsListItemBinding)
+        return MeaningsViewHolder(donateProductsListItemBinding.root, donateProductsItemViewModel, donateProductsListItemBinding)
     }
 
-    inner class DonorsViewHolder internal constructor(itemView: View, viewModel: DonateProductsItemViewModel, viewDataBinding: DonateProductsListItemBinding) :
-        ItemViewHolder<Donor, DonateProductsItemViewModel> (itemView, viewModel, viewDataBinding)
+    inner class MeaningsViewHolder internal constructor(itemView: View, viewModel: DonateProductsItemViewModel, viewDataBinding: DonateProductsListItemBinding) :
+        ItemViewHolder<Meaning, DonateProductsItemViewModel> (itemView, viewModel, viewDataBinding)
 
-    override fun onBindViewHolder(holder: ItemViewHolder<Donor, DonateProductsItemViewModel>, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder<Meaning, DonateProductsItemViewModel>, position: Int) {
         super.onBindViewHolder(holder, position)
         if (position % 2 == 1) {
             holder.itemView.setBackgroundColor(Color.parseColor(uiViewModel.recyclerViewAlternatingColor1))
@@ -45,31 +45,8 @@ class DonateProductsAdapter(private val callbacks: Callbacks) : RecyclerViewFilt
         }
     }
 
-    override fun itemFilterable(donor: Donor, patternOfSubpatterns: String): Boolean {
-        var returnValue = true
-        var constraint = Utils.getPatternOfSubpatterns(patternOfSubpatterns, 0)
-        if (constraint != "<>") {
-            val regexPattern: String
-            val index = constraint.indexOf(',')
-            if (index < 0) {
-                regexPattern = "^$constraint.*"
-            } else {
-                val last = constraint.substring(0, index)
-                val first = constraint.substring(index + 1)
-                regexPattern = "^$last.*,$first.*"
-            }
-            val regex = Regex(regexPattern, setOf(RegexOption.IGNORE_CASE))
-            val target = donor.lastName + "," + donor.firstName
-            returnValue = returnValue && regex.matches(target)  // must match entire target string
-        }
-        if (!returnValue) {
-            return false
-        }
-        constraint = Utils.getPatternOfSubpatterns(patternOfSubpatterns, 1)
-        if (constraint != "<>") {
-            returnValue = returnValue && constraint.equals(donor.aboRh, ignoreCase = true)
-        }
-        return returnValue
+    override fun itemFilterable(item: Meaning, constraint: String): Boolean {
+        return true
     }
 
 }

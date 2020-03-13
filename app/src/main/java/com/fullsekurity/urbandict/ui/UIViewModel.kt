@@ -139,9 +139,9 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
     val productIdTextSize: ObservableField<Float> = ObservableField(0f)
     val productIdTextTypeface: ObservableField<String> = ObservableField("")
 
-    val incorrectDonorTextColor: ObservableField<String> = ObservableField("#ffffff")
-    val incorrectDonorTextSize: ObservableField<Float> = ObservableField(0f)
-    val incorrectDonorTextTypeface: ObservableField<String> = ObservableField("")
+    val incorrectMeaningTextColor: ObservableField<String> = ObservableField("#ffffff")
+    val incorrectMeaningTextSize: ObservableField<Float> = ObservableField(0f)
+    val incorrectMeaningTextTypeface: ObservableField<String> = ObservableField("")
 
     val dropdownTextColor: ObservableField<String> = ObservableField("#ffffff")
     val dropdownTextSize: ObservableField<Float> = ObservableField(0f)
@@ -394,9 +394,9 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
             productIdTextSize.set(textSizeMapper.map(theme, uiDataClass.productIdTextSize))
             productIdTextTypeface.set(typefaceMapper.map(theme, uiDataClass.productIdTextSize))
 
-            incorrectDonorTextColor.set(colorMapper.map(theme, uiDataClass.incorrectDonorTextColor))
-            incorrectDonorTextSize.set(textSizeMapper.map(theme, uiDataClass.incorrectDonorTextSize))
-            incorrectDonorTextTypeface.set(typefaceMapper.map(theme, uiDataClass.incorrectDonorTextSize))
+            incorrectMeaningTextColor.set(colorMapper.map(theme, uiDataClass.incorrectMeaningTextColor))
+            incorrectMeaningTextSize.set(textSizeMapper.map(theme, uiDataClass.incorrectMeaningTextSize))
+            incorrectMeaningTextTypeface.set(typefaceMapper.map(theme, uiDataClass.incorrectMeaningTextSize))
 
             dropdownTextColor.set(colorMapper.map(theme, uiDataClass.dropdownTextColor))
             dropdownTextSize.set(textSizeMapper.map(theme, uiDataClass.dropdownTextSize))

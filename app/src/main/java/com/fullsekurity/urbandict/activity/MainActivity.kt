@@ -30,7 +30,7 @@ import com.fullsekurity.urbandict.donateproducts.DonateProductsListViewModel
 import com.fullsekurity.urbandict.logger.LogUtils
 import com.fullsekurity.urbandict.logger.LogUtils.TagFilter.LOT
 import com.fullsekurity.urbandict.repository.Repository
-import com.fullsekurity.urbandict.repository.storage.Donor
+import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.ui.UIViewModel
 import com.fullsekurity.urbandict.utils.Constants.ROOT_FRAGMENT_TAG
 import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector

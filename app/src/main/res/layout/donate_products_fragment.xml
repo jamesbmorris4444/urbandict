@@ -90,7 +90,7 @@
 
         <!-- End Submit Button -->
 
-        <!-- Start Donor List -->
+        <!-- Start Meaning List -->
 
         <LinearLayout
                 android:id="@+id/top_divider"
@@ -130,7 +130,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
 
-        <!-- End Donor List -->
+        <!-- End Meaning List -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

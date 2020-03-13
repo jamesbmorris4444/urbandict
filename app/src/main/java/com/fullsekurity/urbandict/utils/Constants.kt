@@ -1,12 +1,12 @@
 package com.fullsekurity.urbandict.utils
 
-import com.fullsekurity.urbandict.repository.storage.Donor
+import com.fullsekurity.urbandict.repository.storage.Meaning
 
 object Constants {
 
-    const val MOVIES_ARRAY_DATA_TAG = "results"
+    const val MOVIES_ARRAY_DATA_TAG = "list"
     const val ROOT_FRAGMENT_TAG = "root fragment"
-    val DONOR_LIST_CLASS_TYPE = (ArrayList<Donor>()).javaClass
+    val DONOR_LIST_CLASS_TYPE = (ArrayList<Meaning>()).javaClass
     const val URBANDICT_BASE_URL = "https://mashape-community-urban-dictionary.p.rapidapi.com/"
     const val URBANDICT_RAPID_API_HOST = "x-rapidapi-host: mashape-community-urban-dictionary.p.rapidapi.com"
     const val URBANDICT_RAPID_API_KEY = "x-rapidapi-key: f674a66b81msh663e5810b0cdd7ep162635jsnb30c4b837dd9"
@@ -33,9 +33,9 @@ object Constants {
 
     const val DONATE_PRODUCTS_TITLE = "Donate Products"
     const val CREATE_PRODUCTS_TITLE = "Create Products"
-    const val MANAGE_DONOR_TITLE = "Manage Donor"
+    const val MANAGE_DONOR_TITLE = "Manage Meaning"
     const val REASSOCIATE_DONATION_TITLE = "Reassociate Donation"
     const val UPDATE_TEST_RESULTS_TITLE = "Update Test Results"
-    const val VIEW_DONOR_LIST_TITLE = "View Donor List"
+    const val VIEW_DONOR_LIST_TITLE = "View Meaning List"
 
 }

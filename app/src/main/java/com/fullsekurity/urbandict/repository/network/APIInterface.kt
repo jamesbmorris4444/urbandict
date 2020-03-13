@@ -1,7 +1,6 @@
 package com.fullsekurity.urbandict.repository.network
 
-import com.fullsekurity.urbandict.repository.storage.Donor
-import com.fullsekurity.urbandict.repository.storage.Product
+import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.utils.Constants
 import com.fullsekurity.urbandict.utils.Constants.API_KEY_REQUEST_PARAM
 import com.fullsekurity.urbandict.utils.Constants.LANGUAGE_REQUEST_PARAM

@@ -11,7 +11,7 @@ import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.activity.Callbacks
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewViewModel
 import com.fullsekurity.urbandict.repository.Repository
-import com.fullsekurity.urbandict.repository.storage.Donor
+import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.ui.UIViewModel
 import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
 import com.fullsekurity.urbandict.utils.Utils
@@ -32,7 +32,7 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
     override var adapter: DonateProductsAdapter = DonateProductsAdapter(callbacks)
     override val itemDecorator: RecyclerView.ItemDecoration? = null
     val listIsVisible: ObservableField<Boolean> = ObservableField(true)
-    val newDonorVisible: ObservableField<Int> = ObservableField(View.GONE)
+    val newMeaningVisible: ObservableField<Int> = ObservableField(View.GONE)
     val submitVisible: ObservableField<Int> = ObservableField(View.GONE)
     private var numberOfItemsDisplayed = -1
     var transitionToCreateDonation = true
@@ -62,18 +62,18 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
         }
     }
 
-    private fun showDonors(donorList: List<Donor>) {
+    private fun showMeanings(donorList: List<Meaning>) {
         listIsVisible.set(donorList.isNotEmpty())
         adapter.addAll(donorList.sortedBy { donor -> Utils.donorComparisonByString(donor) })
         numberOfItemsDisplayed = donorList.size
-        setNewDonorVisibility("NONEMPTY")
+        setNewMeaningVisibility("NONEMPTY")
     }
 
-    private fun setNewDonorVisibility(key: String) {
+    private fun setNewMeaningVisibility(key: String) {
         if (key.isNotEmpty() && numberOfItemsDisplayed == 0) {
-            newDonorVisible.set(View.VISIBLE)
+            newMeaningVisible.set(View.VISIBLE)
         } else {
-            newDonorVisible.set(View.GONE)
+            newMeaningVisible.set(View.GONE)
         }
     }
 
@@ -90,11 +90,11 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
     var editTextNameInput: ObservableField<String> = ObservableField("")
     fun onTextNameChanged(key: CharSequence, start: Int, before: Int, count: Int) {
         if (key.isEmpty()) {
-            newDonorVisible.set(View.GONE)
+            newMeaningVisible.set(View.GONE)
             submitVisible.set(View.GONE)
             numberOfItemsDisplayed = -1
         } else {
-            setNewDonorVisibility(key.toString())
+            setNewMeaningVisibility(key.toString())
             submitVisible.set(View.VISIBLE)
         }
         // within "string", the "count" characters beginning at index "start" have just replaced old text that had length "before"
@@ -104,7 +104,7 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
 
     fun onSearchClicked(view: View) {
         Utils.hideKeyboard(view)
-        //repository.handleSearchClick(view, editTextNameInput.get() ?: "", this::showDonors)
+        //repository.handleSearchClick(view, editTextNameInput.get() ?: "", this::showMeanings)
     }
 
 }
