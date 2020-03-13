@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/navigation_donations"
+            android:title="@string/title_donations"/>
+
+    <item
+            android:id="@+id/navigation_transfusions"
+            android:title="@string/title_transfusions"/>
+
+    <item
+            android:id="@+id/navigation_inventory"
+            android:title="@string/title_inventory"/>
+
+</menu>
