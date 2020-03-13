@@ -1,6 +1,6 @@
-package com.fullsekurity.theatreblood.utils
+package com.fullsekurity.urbandict.utils
 
-import com.fullsekurity.theatreblood.repository.storage.Donor
+import com.fullsekurity.urbandict.repository.storage.Donor
 
 object Constants {
 

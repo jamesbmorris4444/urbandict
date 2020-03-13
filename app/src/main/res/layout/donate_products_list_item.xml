@@ -5,17 +5,17 @@
     <data>
         <variable
                 name="uiViewModel"
-                type="com.fullsekurity.theatreblood.ui.UIViewModel" />
+                type="com.fullsekurity.urbandict.ui.UIViewModel" />
         <variable
                 name="donateProductsItemViewModel"
-                type="com.fullsekurity.theatreblood.donateproducts.DonateProductsItemViewModel" />
+                type="com.fullsekurity.urbandict.donateproducts.DonateProductsItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/donate_products_item_root_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{(view) -> donateProductsItemViewModel.onItemClicked(view)}">
+            android:layout_height="wrap_content">
+
 
         <android.widget.TextView
                 android:id="@+id/last_name"

@@ -1,6 +1,6 @@
-package com.fullsekurity.theatreblood.utils
+package com.fullsekurity.urbandict.utils
 
-import com.fullsekurity.theatreblood.activity.MainActivity
+import com.fullsekurity.urbandict.activity.MainActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 

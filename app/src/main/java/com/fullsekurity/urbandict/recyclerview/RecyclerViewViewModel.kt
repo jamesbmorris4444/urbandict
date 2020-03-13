@@ -1,10 +1,9 @@
-package com.fullsekurity.theatreblood.recyclerview
+package com.fullsekurity.urbandict.recyclerview
 
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.recyclerview.widget.RecyclerView
-
 
 abstract class RecyclerViewViewModel(application: Application) : AndroidViewModel(application) {
 

@@ -1,7 +1,7 @@
-package com.fullsekurity.theatreblood.logger
+package com.fullsekurity.urbandict.logger
 
 import android.text.TextUtils
-import com.fullsekurity.theatreblood.logger.LogUtils.LogType.*
+import com.fullsekurity.urbandict.logger.LogUtils.LogType.*
 import timber.log.Timber
 
 object LogUtils {

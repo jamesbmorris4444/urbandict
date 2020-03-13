@@ -1,9 +1,9 @@
-package com.fullsekurity.theatreblood.utils
+package com.fullsekurity.urbandict.utils
 
 import android.content.Context
 import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
-import com.fullsekurity.theatreblood.R
+import com.fullsekurity.urbandict.R
 
 class FontFamily {
     fun getFontResId(context: Context, font: String): Typeface? {

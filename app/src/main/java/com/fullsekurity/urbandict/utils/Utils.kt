@@ -1,9 +1,9 @@
-package com.fullsekurity.theatreblood.utils
+package com.fullsekurity.urbandict.utils
 
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.fullsekurity.theatreblood.repository.storage.Donor
+import com.fullsekurity.urbandict.repository.storage.Donor
 
 class Utils {
 

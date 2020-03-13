@@ -1,4 +1,4 @@
-package com.fullsekurity.theatreblood.utils
+package com.fullsekurity.urbandict.utils
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -10,9 +10,8 @@ import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.fullsekurity.theatreblood.logger.LogUtils
-import com.fullsekurity.theatreblood.logger.LogUtils.TagFilter.MIS
-import com.fullsekurity.theatreblood.recyclerview.RecyclerViewViewModel
+import com.fullsekurity.urbandict.logger.LogUtils
+import com.fullsekurity.urbandict.recyclerview.RecyclerViewViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
@@ -241,7 +240,7 @@ fun setUpperHintColor(textInputLayout: TextInputLayout, color: String) {
         method.isAccessible = true
         method.invoke(textInputLayout, true, true)
     } catch (e: Exception) {
-        LogUtils.E(LogUtils.FilterTags.withTags(MIS), e)
+        LogUtils.E(LogUtils.FilterTags.withTags(LogUtils.TagFilter.MIS), e)
     }
 }
 
@@ -259,6 +258,6 @@ fun setUnfocusedUpperHintColor(textInputLayout: TextInputLayout, color: String) 
         method.isAccessible = true
         method.invoke(textInputLayout, true, true)
     } catch (e: Exception) {
-        LogUtils.E(LogUtils.FilterTags.withTags(MIS), e)
+        LogUtils.E(LogUtils.FilterTags.withTags(LogUtils.TagFilter.MIS), e)
     }
 }

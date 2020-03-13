@@ -1,4 +1,4 @@
-package com.fullsekurity.theatreblood.recyclerview
+package com.fullsekurity.urbandict.recyclerview
 
 import android.view.View
 import android.widget.Filter

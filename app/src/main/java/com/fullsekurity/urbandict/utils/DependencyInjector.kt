@@ -1,21 +1,14 @@
-package com.fullsekurity.theatreblood.utils
+package com.fullsekurity.urbandict.utils
 
 import androidx.lifecycle.ViewModelProvider
-import com.fullsekurity.theatreblood.activity.MainActivity
-import com.fullsekurity.theatreblood.createproducts.CreateProductsFragment
-import com.fullsekurity.theatreblood.createproducts.CreateProductsListViewModel
-import com.fullsekurity.theatreblood.donateproducts.DonateProductsFragment
-import com.fullsekurity.theatreblood.donateproducts.DonateProductsListViewModel
-import com.fullsekurity.theatreblood.managedonor.DonorFragment
-import com.fullsekurity.theatreblood.managedonor.ManageDonorViewModel
-import com.fullsekurity.theatreblood.modal.StandardModal
-import com.fullsekurity.theatreblood.reassociateproducts.ReassociateProductsFragment
-import com.fullsekurity.theatreblood.reassociateproducts.ReassociateProductsListViewModel
-import com.fullsekurity.theatreblood.repository.Repository
-import com.fullsekurity.theatreblood.ui.UIViewModel
-import com.fullsekurity.theatreblood.ui.UIViewModelFactory
-import com.fullsekurity.theatreblood.viewdonorlist.ViewDonorListFragment
-import com.fullsekurity.theatreblood.viewdonorlist.ViewDonorListListViewModel
+import com.fullsekurity.urbandict.activity.MainActivity
+import com.fullsekurity.urbandict.donateproducts.DonateProductsFragment
+import com.fullsekurity.urbandict.donateproducts.DonateProductsListViewModel
+import com.fullsekurity.urbandict.modal.StandardModal
+import com.fullsekurity.urbandict.repository.Repository
+import com.fullsekurity.urbandict.ui.UIViewModel
+import com.fullsekurity.urbandict.ui.UIViewModelFactory
+
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -32,16 +25,8 @@ interface MapperDependencyInjector {
 interface ViewModelDependencyInjector {
     fun inject(fragment: DonateProductsFragment)
     fun inject(modal: StandardModal)
-    fun inject(fragment: DonorFragment)
     fun inject(viewModel: DonateProductsListViewModel)
-    fun inject(viewModelManage: ManageDonorViewModel)
     fun inject(activity: MainActivity)
-    fun inject(viewModel: CreateProductsListViewModel)
-    fun inject(fragment: CreateProductsFragment)
-    fun inject(viewModel: ReassociateProductsListViewModel)
-    fun inject(fragment: ReassociateProductsFragment)
-    fun inject(fragment: ViewDonorListFragment)
-    fun inject(viewModel: ViewDonorListListViewModel)
 }
 
 @Module

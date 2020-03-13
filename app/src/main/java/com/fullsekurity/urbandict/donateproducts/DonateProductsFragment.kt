@@ -1,4 +1,4 @@
-package com.fullsekurity.theatreblood.donateproducts
+package com.fullsekurity.urbandict.donateproducts
 
 import android.content.Context
 import android.os.Bundle
@@ -12,17 +12,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
-import com.fullsekurity.theatreblood.R
-import com.fullsekurity.theatreblood.activity.Callbacks
-import com.fullsekurity.theatreblood.activity.MainActivity
-import com.fullsekurity.theatreblood.createproducts.CreateProductsListViewModel
-import com.fullsekurity.theatreblood.databinding.DonateProductsFragmentBinding
-import com.fullsekurity.theatreblood.reassociateproducts.ReassociateProductsListViewModel
-import com.fullsekurity.theatreblood.ui.UIViewModel
-import com.fullsekurity.theatreblood.utils.Constants
-import com.fullsekurity.theatreblood.utils.DaggerViewModelDependencyInjector
-import com.fullsekurity.theatreblood.utils.ViewModelInjectorModule
-import com.fullsekurity.theatreblood.viewdonorlist.ViewDonorListListViewModel
+import com.fullsekurity.urbandict.R
+import com.fullsekurity.urbandict.activity.Callbacks
+import com.fullsekurity.urbandict.activity.MainActivity
+import com.fullsekurity.urbandict.databinding.DonateProductsFragmentBinding
+import com.fullsekurity.urbandict.ui.UIViewModel
+import com.fullsekurity.urbandict.utils.Constants
+import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
+import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -103,18 +100,8 @@ class DonateProductsFragment : Fragment(), Callbacks {
         return binding.root
     }
 
-    override fun fetchRadioButton(resId: Int): RadioButton {
-        return fetchRootView().findViewById(resId)
-    }
-
-    override fun fetchDropdown(resId: Int) : Spinner? { return null }
-    override fun fetchCreateProductsListViewModel() : CreateProductsListViewModel? { return null }
-
     override fun fetchDonateProductsListViewModel() : DonateProductsListViewModel? {
         return donateProductsListViewModel
     }
-
-    override fun fetchReassociateProductsListViewModel() : ReassociateProductsListViewModel? { return null }
-    override fun fetchViewDonorListViewModel() : ViewDonorListListViewModel? { return null }
 
 }

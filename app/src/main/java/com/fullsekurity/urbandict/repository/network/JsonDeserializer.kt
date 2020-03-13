@@ -1,8 +1,8 @@
-package com.fullsekurity.theatreblood.repository.network
+package com.fullsekurity.urbandict.repository.network
 
 import android.util.Log
-import com.fullsekurity.theatreblood.repository.storage.Donor
-import com.fullsekurity.theatreblood.utils.Constants
+import com.fullsekurity.urbandict.repository.storage.Donor
+import com.fullsekurity.urbandict.utils.Constants
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement

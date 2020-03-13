@@ -6,10 +6,10 @@
     <data>
         <variable
                 name="uiViewModel"
-                type="com.fullsekurity.theatreblood.ui.UIViewModel" />
+                type="com.fullsekurity.urbandict.ui.UIViewModel" />
         <variable
                 name="standardModal"
-                type="com.fullsekurity.theatreblood.modal.StandardModal" />
+                type="com.fullsekurity.urbandict.modal.StandardModal" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

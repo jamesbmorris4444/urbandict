@@ -6,7 +6,7 @@
     <data>
         <variable
             name="uiViewModel"
-            type="com.fullsekurity.theatreblood.ui.UIViewModel" />
+            type="com.fullsekurity.urbandict.ui.UIViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

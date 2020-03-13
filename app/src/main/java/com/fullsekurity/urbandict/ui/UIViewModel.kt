@@ -1,6 +1,6 @@
 
 
-package com.fullsekurity.theatreblood.ui
+package com.fullsekurity.urbandict.ui
 
 import android.app.Application
 import android.content.Context
@@ -13,17 +13,18 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
-import com.fullsekurity.theatreblood.R
-import com.fullsekurity.theatreblood.activity.MainActivity
-import com.fullsekurity.theatreblood.logger.LogUtils
-import com.fullsekurity.theatreblood.logger.LogUtils.TagFilter.THM
-import com.fullsekurity.theatreblood.utils.*
-import com.fullsekurity.theatreblood.utils.Constants.STANDARD_BUTTON_HEIGHT
-import com.fullsekurity.theatreblood.utils.Constants.STANDARD_EDIT_TEXT_HEIGHT
-import com.fullsekurity.theatreblood.utils.Constants.STANDARD_EDIT_TEXT_SMALL_MARGIN
-import com.fullsekurity.theatreblood.utils.Constants.STANDARD_GRID_EDIT_TEXT_HEIGHT
-import com.fullsekurity.theatreblood.utils.Constants.STANDARD_GRID_HEIGHT
-import com.fullsekurity.theatreblood.utils.Constants.STANDARD_LEFT_AND_RIGHT_MARGIN
+import com.fullsekurity.urbandict.R
+import com.fullsekurity.urbandict.utils.DaggerMapperDependencyInjector
+import com.fullsekurity.urbandict.activity.MainActivity
+import com.fullsekurity.urbandict.logger.LogUtils
+import com.fullsekurity.urbandict.logger.LogUtils.TagFilter.THM
+import com.fullsekurity.urbandict.utils.*
+import com.fullsekurity.urbandict.utils.Constants.STANDARD_BUTTON_HEIGHT
+import com.fullsekurity.urbandict.utils.Constants.STANDARD_EDIT_TEXT_HEIGHT
+import com.fullsekurity.urbandict.utils.Constants.STANDARD_EDIT_TEXT_SMALL_MARGIN
+import com.fullsekurity.urbandict.utils.Constants.STANDARD_GRID_EDIT_TEXT_HEIGHT
+import com.fullsekurity.urbandict.utils.Constants.STANDARD_GRID_HEIGHT
+import com.fullsekurity.urbandict.utils.Constants.STANDARD_LEFT_AND_RIGHT_MARGIN
 import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
@@ -284,10 +285,8 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
             // change colors in these styles to match any changes to colors in UIDataModel
             if (theme == MainActivity.UITheme.LIGHT) {
                 editTextDisplayModifyHintStyle = R.style.TextInputLayoutForLight
-                datePickerColorStyle = R.style.DatePickerDialogThemeForLight
             } else {
                 editTextDisplayModifyHintStyle = R.style.TextInputLayoutForDark
-                datePickerColorStyle = R.style.DatePickerDialogThemeForDark
             }
 
             recyclerViewAlternatingColor1 = colorMapper.map(theme, uiDataClass.recyclerViewAlternatingColor1)

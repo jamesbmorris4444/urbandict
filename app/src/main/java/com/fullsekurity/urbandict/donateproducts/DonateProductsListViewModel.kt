@@ -1,4 +1,4 @@
-package com.fullsekurity.theatreblood.donateproducts
+package com.fullsekurity.urbandict.donateproducts
 
 import android.app.Application
 import android.view.View
@@ -7,15 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.fullsekurity.theatreblood.R
-import com.fullsekurity.theatreblood.activity.Callbacks
-import com.fullsekurity.theatreblood.recyclerview.RecyclerViewViewModel
-import com.fullsekurity.theatreblood.repository.Repository
-import com.fullsekurity.theatreblood.repository.storage.Donor
-import com.fullsekurity.theatreblood.ui.UIViewModel
-import com.fullsekurity.theatreblood.utils.DaggerViewModelDependencyInjector
-import com.fullsekurity.theatreblood.utils.Utils
-import com.fullsekurity.theatreblood.utils.ViewModelInjectorModule
+import com.fullsekurity.urbandict.R
+import com.fullsekurity.urbandict.activity.Callbacks
+import com.fullsekurity.urbandict.recyclerview.RecyclerViewViewModel
+import com.fullsekurity.urbandict.repository.Repository
+import com.fullsekurity.urbandict.repository.storage.Donor
+import com.fullsekurity.urbandict.ui.UIViewModel
+import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
+import com.fullsekurity.urbandict.utils.Utils
+import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import javax.inject.Inject
@@ -104,13 +104,7 @@ class DonateProductsListViewModel(private val callbacks: Callbacks) : RecyclerVi
 
     fun onSearchClicked(view: View) {
         Utils.hideKeyboard(view)
-        repository.handleSearchClick(view, editTextNameInput.get() ?: "", this::showDonors)
-    }
-
-    fun onNewDonorClicked(view: View) {
-        callbacks.fetchActivity().loadDonorFragment(null, transitionToCreateDonation)
-        repository.newDonorInProgress = true
-        repository.newDonor = null
+        //repository.handleSearchClick(view, editTextNameInput.get() ?: "", this::showDonors)
     }
 
 }

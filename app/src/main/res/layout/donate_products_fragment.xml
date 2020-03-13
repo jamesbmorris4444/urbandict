@@ -7,11 +7,11 @@
 
         <variable
             name="uiViewModel"
-            type="com.fullsekurity.theatreblood.ui.UIViewModel" />
+            type="com.fullsekurity.urbandict.ui.UIViewModel" />
 
         <variable
             name="donateProductsListViewModel"
-            type="com.fullsekurity.theatreblood.donateproducts.DonateProductsListViewModel" />
+            type="com.fullsekurity.urbandict.donateproducts.DonateProductsListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -90,38 +90,6 @@
 
         <!-- End Submit Button -->
 
-        <!-- Start New Donor Button -->
-
-        <android.widget.ImageView
-                android:id="@+id/new_donor_button_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@{uiViewModel.largeButtonDrawable}"
-                android:layout_marginTop="10dp"
-                android:onClick="@{(view) -> donateProductsListViewModel.onNewDonorClicked(view)}"
-                android:visibility="@{safeUnbox(donateProductsListViewModel.newDonorVisible)}"
-                app:layout_height_dynamic="@{safeUnbox(uiViewModel.standardButtonHeight)}"
-                app:layout_width_dynamic="@{safeUnbox(uiViewModel.standardLargeButtonWidth)}"
-                app:layout_constraintTop_toBottomOf="@+id/edit_text_input_name"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
-
-        <TextView
-                android:id="@+id/new_donor_button_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_new_donor"
-                android:visibility="@{safeUnbox(donateProductsListViewModel.newDonorVisible)}"
-                app:text_font="@{uiViewModel.buttonTextTypeface}"
-                app:text_color="@{uiViewModel.buttonTextColor}"
-                app:text_size="@{safeUnbox(uiViewModel.buttonTextSize)}"
-                app:layout_constraintStart_toStartOf="@+id/new_donor_button_icon"
-                app:layout_constraintEnd_toEndOf="@+id/new_donor_button_icon"
-                app:layout_constraintTop_toTopOf="@+id/new_donor_button_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/new_donor_button_icon" />
-
-        <!-- End New Donor Button -->
-
         <!-- Start Donor List -->
 
         <LinearLayout
@@ -131,7 +99,7 @@
                 android:layout_height="1dp"
                 app:background_color="@{uiViewModel.standardDialogDividerColor}"
                 android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/new_donor_button_icon"
+                app:layout_constraintTop_toBottomOf="@+id/submit_button_icon"
                 app:layout_constraintLeft_toLeftOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView

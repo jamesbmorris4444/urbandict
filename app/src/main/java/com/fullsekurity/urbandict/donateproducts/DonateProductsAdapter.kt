@@ -1,17 +1,17 @@
-package com.fullsekurity.theatreblood.donateproducts
+package com.fullsekurity.urbandict.donateproducts
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.fullsekurity.theatreblood.R
-import com.fullsekurity.theatreblood.activity.Callbacks
-import com.fullsekurity.theatreblood.databinding.DonateProductsListItemBinding
-import com.fullsekurity.theatreblood.recyclerview.RecyclerViewFilterAdapter
-import com.fullsekurity.theatreblood.repository.storage.Donor
-import com.fullsekurity.theatreblood.ui.UIViewModel
-import com.fullsekurity.theatreblood.utils.Utils
+import com.fullsekurity.urbandict.R
+import com.fullsekurity.urbandict.databinding.DonateProductsListItemBinding
+import com.fullsekurity.urbandict.activity.Callbacks
+import com.fullsekurity.urbandict.recyclerview.RecyclerViewFilterAdapter
+import com.fullsekurity.urbandict.repository.storage.Donor
+import com.fullsekurity.urbandict.ui.UIViewModel
+import com.fullsekurity.urbandict.utils.Utils
 
 class DonateProductsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdapter<Donor, DonateProductsItemViewModel>() {
 

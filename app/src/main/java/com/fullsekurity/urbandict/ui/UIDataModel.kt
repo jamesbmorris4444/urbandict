@@ -1,7 +1,7 @@
-package com.fullsekurity.theatreblood.ui
+package com.fullsekurity.urbandict.ui
 
-import com.fullsekurity.theatreblood.R
-import com.fullsekurity.theatreblood.activity.MainActivity
+import com.fullsekurity.urbandict.R
+import com.fullsekurity.urbandict.activity.MainActivity
 
 class UIDataModel {
     private var lightViewUIDataClass: UIDataClass? = null

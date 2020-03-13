@@ -1,4 +1,4 @@
-package com.fullsekurity.theatreblood.modal
+package com.fullsekurity.urbandict.modal
 
 import android.app.Dialog
 import android.content.Context
@@ -16,15 +16,15 @@ import androidx.databinding.ObservableField
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.fullsekurity.theatreblood.R
-import com.fullsekurity.theatreblood.activity.Callbacks
-import com.fullsekurity.theatreblood.databinding.StandardModalBinding
-import com.fullsekurity.theatreblood.databinding.StandardModalFooterItemBinding
-import com.fullsekurity.theatreblood.databinding.StandardModalHeaderItemBinding
-import com.fullsekurity.theatreblood.databinding.StandardModalListItemBinding
-import com.fullsekurity.theatreblood.ui.UIViewModel
-import com.fullsekurity.theatreblood.utils.DaggerViewModelDependencyInjector
-import com.fullsekurity.theatreblood.utils.ViewModelInjectorModule
+import com.fullsekurity.urbandict.R
+import com.fullsekurity.urbandict.activity.Callbacks
+import com.fullsekurity.urbandict.databinding.StandardModalBinding
+import com.fullsekurity.urbandict.databinding.StandardModalFooterItemBinding
+import com.fullsekurity.urbandict.databinding.StandardModalHeaderItemBinding
+import com.fullsekurity.urbandict.databinding.StandardModalListItemBinding
+import com.fullsekurity.urbandict.ui.UIViewModel
+import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
+import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
 import javax.inject.Inject
 
 class StandardModal (

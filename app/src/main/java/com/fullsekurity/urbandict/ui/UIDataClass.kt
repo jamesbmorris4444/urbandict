@@ -1,4 +1,4 @@
-package com.fullsekurity.theatreblood.ui
+package com.fullsekurity.urbandict.ui
 
 class UIDataClass(
 

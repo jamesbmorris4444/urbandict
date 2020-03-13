@@ -1,9 +1,9 @@
-package com.fullsekurity.theatreblood.repository.network
+package com.fullsekurity.urbandict.repository.network
 
-import com.fullsekurity.theatreblood.logger.LogUtils
-import com.fullsekurity.theatreblood.logger.LogUtils.TagFilter.API
-import com.fullsekurity.theatreblood.utils.Constants.DONOR_LIST_CLASS_TYPE
-import com.fullsekurity.theatreblood.utils.Constants.THEATRE_BLOOD_BASE_URL
+import com.fullsekurity.urbandict.logger.LogUtils
+import com.fullsekurity.urbandict.logger.LogUtils.TagFilter.API
+import com.fullsekurity.urbandict.utils.Constants.DONOR_LIST_CLASS_TYPE
+import com.fullsekurity.urbandict.utils.Constants.THEATRE_BLOOD_BASE_URL
 import com.google.gson.GsonBuilder
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor

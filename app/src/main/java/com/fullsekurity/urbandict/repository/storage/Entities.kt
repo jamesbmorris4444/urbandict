@@ -1,4 +1,4 @@
-package com.fullsekurity.theatreblood.repository.storage
+package com.fullsekurity.urbandict.repository.storage
 
 import androidx.room.*
 import com.google.gson.annotations.SerializedName

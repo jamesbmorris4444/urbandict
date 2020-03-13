@@ -1,4 +1,4 @@
-package com.fullsekurity.theatreblood.recyclerview
+package com.fullsekurity.urbandict.recyclerview
 
 import androidx.lifecycle.ViewModel
 
