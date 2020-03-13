@@ -32,18 +32,8 @@ class DonateProductsFragment : Fragment(), Callbacks {
     private var transitionToCreateDonation = true
 
     companion object {
-        fun newInstance(transitionToCreateDonation: Boolean): DonateProductsFragment {
-            val bundle = Bundle()
-            bundle.putBoolean("transitionToCreateDonationArgument", transitionToCreateDonation)
-            val fragment = DonateProductsFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
-    }
-
-    private fun readBundle(bundle: Bundle?) {
-        bundle?.let {
-            transitionToCreateDonation = it.getBoolean("transitionToCreateDonationArgument")
+        fun newInstance(): DonateProductsFragment {
+            return DonateProductsFragment()
         }
     }
 
@@ -65,7 +55,6 @@ class DonateProductsFragment : Fragment(), Callbacks {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        readBundle(arguments)
         binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.donate_products_fragment, container, false) as DonateProductsFragmentBinding
         binding.lifecycleOwner = this
         donateProductsListViewModel = ViewModelProvider(this, DonateProductsListViewModelFactory(this)).get(DonateProductsListViewModel::class.java)

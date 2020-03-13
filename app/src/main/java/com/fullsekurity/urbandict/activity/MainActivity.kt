@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity(), Callbacks {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { onBackPressed() }
         lottieBackgroundView = activityMainBinding.root.findViewById(R.id.main_background_lottie)
+        loadInitialFragment()
         val settings = getSharedPreferences("THEME", Context.MODE_PRIVATE)
         val name: String? = settings.getString("THEME", UITheme.LIGHT.name)
         if (name != null) {
@@ -87,14 +88,15 @@ class MainActivity : AppCompatActivity(), Callbacks {
         }
     }
 
-    fun finishActivity() {
-        finish()
+    fun loadInitialFragment() {
+        supportFragmentManager.popBackStack(ROOT_FRAGMENT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        loadDonateProductsFragment()
     }
 
-    fun loadDonateProductsFragment(transitionToCreateDonation: Boolean) {
+    fun loadDonateProductsFragment() {
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-            .replace(R.id.main_activity_container, DonateProductsFragment.newInstance(transitionToCreateDonation))
+            .replace(R.id.main_activity_container, DonateProductsFragment.newInstance())
             .commitAllowingStateLoss()
     }
 
