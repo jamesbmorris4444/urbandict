@@ -2,6 +2,7 @@ package com.fullsekurity.urbandict.utils
 
 import androidx.lifecycle.ViewModelProvider
 import com.fullsekurity.urbandict.activity.MainActivity
+import com.fullsekurity.urbandict.meanings.MeaningsAdapter
 import com.fullsekurity.urbandict.meanings.MeaningsFragment
 import com.fullsekurity.urbandict.meanings.MeaningsListViewModel
 import com.fullsekurity.urbandict.modal.StandardModal
@@ -27,6 +28,7 @@ interface ViewModelDependencyInjector {
     fun inject(modal: StandardModal)
     fun inject(viewModel: MeaningsListViewModel)
     fun inject(activity: MainActivity)
+    fun inject(adapter: MeaningsAdapter)
 }
 
 @Module

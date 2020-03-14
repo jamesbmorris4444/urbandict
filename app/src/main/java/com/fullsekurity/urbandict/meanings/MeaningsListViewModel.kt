@@ -46,7 +46,6 @@ class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewView
             .viewModelInjectorModule(ViewModelInjectorModule(callbacks.fetchActivity()))
             .build()
             .inject(this)
-        adapter.uiViewModel = uiViewModel
     }
 
     override fun setLayoutManager(): RecyclerView.LayoutManager {

@@ -1,8 +1,6 @@
 package com.fullsekurity.urbandict.meanings
 
 import androidx.databinding.ObservableField
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.fullsekurity.urbandict.activity.Callbacks
 import com.fullsekurity.urbandict.logger.LogUtils
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewItemViewModel
@@ -13,12 +11,6 @@ import java.util.*
 
 
 @Suppress("UNCHECKED_CAST")
-class MeaningsItemViewModelFactory(private val callbacks: Callbacks) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MeaningsItemViewModel(callbacks) as T
-    }
-}
-
 class MeaningsItemViewModel(private val callbacks: Callbacks) : RecyclerViewItemViewModel<Meaning>() {
 
     val definition: ObservableField<String> = ObservableField("")

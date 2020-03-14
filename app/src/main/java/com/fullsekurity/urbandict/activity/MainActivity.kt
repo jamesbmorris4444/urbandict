@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), Callbacks {
 
     private lateinit var lottieBackgroundView: LottieAnimationView
     private lateinit var activityMainBinding: ActivityMainBinding
-    private var networkStatusMenuItem: MenuItem? = null
+    private var thumbsStatusMenuItem: MenuItem? = null
 
     enum class UITheme {
         LIGHT, DARK, NOT_ASSIGNED,
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity(), Callbacks {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { onBackPressed() }
-        lottieBackgroundView = activityMainBinding.root.findViewById(R.id.main_background_lottie)
+        lottieBackgroundView = main_background_lottie
         loadInitialFragment()
         val settings = getSharedPreferences("THEME", Context.MODE_PRIVATE)
         val name: String? = settings.getString("THEME", UITheme.LIGHT.name)
@@ -87,7 +87,8 @@ class MainActivity : AppCompatActivity(), Callbacks {
     }
 
     private fun loadMeaningsFragment() {
-        supportFragmentManager.beginTransaction()
+        supportFragmentManager
+            .beginTransaction()
             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
             .replace(R.id.main_activity_container, MeaningsFragment.newInstance())
             .commitAllowingStateLoss()
@@ -97,8 +98,8 @@ class MainActivity : AppCompatActivity(), Callbacks {
         supportActionBar?.let { actionBar ->
             actionBar.setBackgroundDrawable(ColorDrawable(Color.parseColor(uiViewModel.primaryColor)))
             colorizeToolbarOverflowButton(toolbar, Color.parseColor(uiViewModel.toolbarTextColor))
-            val upArrow = ContextCompat.getDrawable(this, R.drawable.toolbar_back_arrow)
-            actionBar.setHomeAsUpIndicator(upArrow);
+            val backArrow = ContextCompat.getDrawable(this, R.drawable.toolbar_back_arrow)
+            actionBar.setHomeAsUpIndicator(backArrow);
             toolbar.setTitleTextColor(Color.parseColor(uiViewModel.toolbarTextColor))
         }
     }
@@ -117,9 +118,9 @@ class MainActivity : AppCompatActivity(), Callbacks {
     }
 
     private fun setToolbarThumbStatus(resInt: Int) {
-        networkStatusMenuItem?.let { networkStatusMenuItem ->
+        thumbsStatusMenuItem?.let { thumbsStatusMenuItem ->
             runOnUiThread {
-                networkStatusMenuItem.icon = ContextCompat.getDrawable(this, resInt)
+                thumbsStatusMenuItem.icon = ContextCompat.getDrawable(this, resInt)
             }
         }
     }
@@ -153,7 +154,7 @@ class MainActivity : AppCompatActivity(), Callbacks {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
-        networkStatusMenuItem = menu.findItem(R.id.thumb_status)
+        thumbsStatusMenuItem = menu.findItem(R.id.thumb_status)
         setToolbarThumbStatus(R.drawable.ic_thumbsup_dark)
         return true
     }

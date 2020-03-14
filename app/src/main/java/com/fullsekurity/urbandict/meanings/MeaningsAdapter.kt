@@ -5,19 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.activity.Callbacks
 import com.fullsekurity.urbandict.databinding.MeaningsListItemBinding
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewFilterAdapter
 import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.ui.UIViewModel
+import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
+import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
+import javax.inject.Inject
 
 
 class MeaningsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdapter<Meaning, MeaningsItemViewModel>() {
 
     private var adapterFilter: AdapterFilter? = null
+
+    @Inject
     lateinit var uiViewModel: UIViewModel
+
+    init {
+        DaggerViewModelDependencyInjector.builder()
+            .viewModelInjectorModule(ViewModelInjectorModule(callbacks.fetchActivity()))
+            .build()
+            .inject(this)
+    }
 
     override fun getFilter(): AdapterFilter {
         adapterFilter?.let {
@@ -28,7 +39,7 @@ class MeaningsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeaningsViewHolder {
         val meaningsListItemBinding: MeaningsListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.meanings_list_item, parent, false)
-        val meaningsItemViewModel = ViewModelProvider(callbacks.fetchFragment() as MeaningsFragment, MeaningsItemViewModelFactory(callbacks)).get(MeaningsItemViewModel::class.java)
+        val meaningsItemViewModel = MeaningsItemViewModel(callbacks)
         meaningsListItemBinding.meaningsItemViewModel = meaningsItemViewModel
         meaningsListItemBinding.uiViewModel = uiViewModel
         return MeaningsViewHolder(meaningsListItemBinding.root, meaningsItemViewModel, meaningsListItemBinding)
