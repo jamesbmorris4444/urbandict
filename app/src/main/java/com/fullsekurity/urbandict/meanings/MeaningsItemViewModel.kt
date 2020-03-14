@@ -9,8 +9,6 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-@Suppress("UNCHECKED_CAST")
 class MeaningsItemViewModel(private val callbacks: Callbacks) : RecyclerViewItemViewModel<Meaning>() {
 
     val definition: ObservableField<String> = ObservableField("")

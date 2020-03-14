@@ -24,10 +24,8 @@ import javax.inject.Inject
 class MeaningsFragment : Fragment(), Callbacks {
 
     private lateinit var meaningsListViewModel: MeaningsListViewModel
-    private lateinit var lottieBackgroundView: LottieAnimationView
     private lateinit var binding: MeaningsFragmentBinding
     private lateinit var mainActivity: MainActivity
-    private var transitionToCreateDonation = true
 
     companion object {
         fun newInstance(): MeaningsFragment {
@@ -58,10 +56,7 @@ class MeaningsFragment : Fragment(), Callbacks {
         meaningsListViewModel = ViewModelProvider(this, MeaningsListViewModelFactory(this)).get(MeaningsListViewModel::class.java)
         binding.meaningsListViewModel = meaningsListViewModel
         binding.uiViewModel = uiViewModel
-        meaningsListViewModel.transitionToCreateDonation = transitionToCreateDonation
         uiViewModel.currentTheme = (activity as MainActivity).currentTheme
-        //lottieBackgroundView = binding.root.findViewById(R.id.background_lottie)
-        //uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
         return binding.root
     }
 

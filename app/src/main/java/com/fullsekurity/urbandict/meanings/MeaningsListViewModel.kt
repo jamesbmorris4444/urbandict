@@ -28,13 +28,10 @@ class MeaningsListViewModelFactory(private val callbacks: Callbacks) : ViewModel
 
 class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewViewModel(callbacks.fetchActivity().application) {
 
-    private val tag = MeaningsListViewModel::class.java.simpleName
     override var adapter: MeaningsAdapter = MeaningsAdapter(callbacks)
     override val itemDecorator: RecyclerView.ItemDecoration? = null
     val listIsVisible: ObservableField<Boolean> = ObservableField(true)
     val submitVisible: ObservableField<Int> = ObservableField(View.GONE)
-    private var numberOfItemsDisplayed = -1
-    var transitionToCreateDonation = true
 
     @Inject
     lateinit var uiViewModel: UIViewModel
@@ -74,7 +71,6 @@ class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewView
     fun onTextNameChanged(key: CharSequence, start: Int, before: Int, count: Int) {
         if (key.isEmpty()) {
             submitVisible.set(View.GONE)
-            numberOfItemsDisplayed = -1
         } else {
             submitVisible.set(View.VISIBLE)
         }
@@ -95,7 +91,6 @@ class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewView
         progressBar.visibility = View.GONE
         if (meaningsList == null) {
             listIsVisible.set(false)
-            numberOfItemsDisplayed = -1
         } else {
             listIsVisible.set(meaningsList.isNotEmpty())
             if (uiViewModel.sortThumbsUp) {
@@ -103,7 +98,6 @@ class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewView
             } else {
                 adapter.addAll(meaningsList.sortedByDescending { meaning -> Utils.donorComparisonByThumbsDown(meaning) })
             }
-            numberOfItemsDisplayed = meaningsList.size
         }
     }
 

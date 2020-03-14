@@ -23,12 +23,6 @@ fun setBackgroundr(view: EditText, resInt: Int) {
     view.requestLayout()
 }
 
-@BindingAdapter("dropdown_background")
-fun setDropdownBackground(view: Spinner, drawable: Drawable?) {
-    view.setPopupBackgroundDrawable(drawable)
-    view.requestLayout()
-}
-
 @BindingAdapter("image_background")
 fun setBackgroundImage(imageView: ImageView, resource: Drawable) {
     imageView.setImageDrawable(resource)
@@ -39,14 +33,6 @@ fun setMarginTop(v: View, topMargin: Int) {
     v.layoutParams ?: return
     val layoutParams = v.layoutParams as ViewGroup.MarginLayoutParams
     layoutParams.topMargin = topMargin
-    v.layoutParams = layoutParams
-    v.requestLayout()
-}
-
-@BindingAdapter("layout_marginBottom")
-fun setMarginBottom(v: View, bottomMargin: Int) {
-    val layoutParams = v.layoutParams as ViewGroup.MarginLayoutParams
-    layoutParams.bottomMargin = bottomMargin
     v.layoutParams = layoutParams
     v.requestLayout()
 }
@@ -73,22 +59,6 @@ fun setTextViewGravity(v: TextView, gravity: Int) {
     v.requestLayout()
 }
 
-@BindingAdapter("layout_marginLeft_computed")
-fun setMarginLeftComputed(v: View, leftandRightMargin: Int) {
-    val layoutParams = v.layoutParams as ViewGroup.MarginLayoutParams
-    layoutParams.leftMargin = leftandRightMargin
-    v.layoutParams = layoutParams
-    v.requestLayout()
-}
-
-@BindingAdapter("layout_marginRight_computed")
-fun setMarginRightComputed(v: View, leftandRightMargin: Int) {
-    val layoutParams = v.layoutParams as ViewGroup.MarginLayoutParams
-    layoutParams.rightMargin = leftandRightMargin
-    v.layoutParams = layoutParams
-    v.requestLayout()
-}
-
 @BindingAdapter("text_font")
 fun setFont(view: TextView, font: String) {
     val typeface = FontFamily.newInstance().getFontResId(view.context, font)
@@ -107,13 +77,6 @@ fun setEditTextFont(view: EditText, font: String) {
     view.typeface = typeface
 }
 
-@BindingAdapter("include_font_padding")
-fun setIncludeFontPadding(view: TextView, apply: Boolean) {
-    if (apply) {
-        view.includeFontPadding = true
-    }
-}
-
 @BindingAdapter("text_color")
 fun setTextColor(view: TextView, color: String) {
     view.setTextColor(Color.parseColor(color))
@@ -124,12 +87,6 @@ fun setTextColor(view: TextView, color: String) {
 fun setEditTextColor(view: EditText, color: String) {
     view.setTextColor(Color.parseColor(color))
     // If color is ever needed as a drawable: Converters.convertColorToDrawable(0x00ff00)
-}
-
-@BindingAdapter("edit_text_background_color")
-fun setEditTextBackgroundColor(view: TextInputEditText, color: String) {
-    val colorStateList = ColorStateList.valueOf(Color.parseColor(color))
-    view.supportBackgroundTintList = colorStateList
 }
 
 @BindingAdapter("edit_text_underline_color")
@@ -149,11 +106,6 @@ fun setBackgroundColor(view: LinearLayout, color: String) {
     view.setBackgroundColor(Color.parseColor(color))
 }
 
-@BindingAdapter("radio_button_color")
-fun radioButtonColor(view: AppCompatRadioButton, color: String) {
-    view.supportButtonTintList = ColorStateList.valueOf(Color.parseColor(color))
-}
-
 @BindingAdapter("text_size")
 fun setTextSize(view: TextView, size: Float) {
     view.textSize = size
@@ -162,12 +114,6 @@ fun setTextSize(view: TextView, size: Float) {
 @BindingAdapter("edit_text_size")
 fun setEditTextSize(view: EditText, size: Float) {
     view.textSize = size
-}
-
-@BindingAdapter("card_view_background_color")
-fun setCardColor(view: View, color: String) {
-    (view as CardView).setCardBackgroundColor(Color.parseColor(color))
-    // If color is ever needed as a drawable: Converters.convertColorToDrawable(0x00ff00)
 }
 
 @BindingAdapter("layout_width_dynamic")
