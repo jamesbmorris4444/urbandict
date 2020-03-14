@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.airbnb.lottie.*
 import com.fullsekurity.urbandict.R
@@ -159,6 +160,10 @@ class MainActivity : AppCompatActivity(), Callbacks {
 
     override fun fetchActivity(): MainActivity {
         return this
+    }
+
+    override fun fetchFragment(): Fragment? {
+        return null
     }
 
     override fun fetchRootView(): View {

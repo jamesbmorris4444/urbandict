@@ -83,6 +83,10 @@ class MeaningsFragment : Fragment(), Callbacks {
         }
     }
 
+    override fun fetchFragment(): Fragment? {
+        return this
+    }
+
     override fun fetchRootView(): View {
         return binding.root
     }

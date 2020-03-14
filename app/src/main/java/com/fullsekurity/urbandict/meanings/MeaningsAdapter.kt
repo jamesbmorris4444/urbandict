@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.fullsekurity.urbandict.R
-import com.fullsekurity.urbandict.databinding.MeaningsListItemBinding
 import com.fullsekurity.urbandict.activity.Callbacks
+import com.fullsekurity.urbandict.databinding.MeaningsListItemBinding
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewFilterAdapter
 import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.ui.UIViewModel
+
 
 class MeaningsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdapter<Meaning, MeaningsItemViewModel>() {
 
@@ -26,10 +28,10 @@ class MeaningsAdapter(private val callbacks: Callbacks) : RecyclerViewFilterAdap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MeaningsViewHolder {
         val meaningsListItemBinding: MeaningsListItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.meanings_list_item, parent, false)
-        val donateProductsItemViewModel = MeaningsItemViewModel(callbacks)
-        meaningsListItemBinding.meaningsItemViewModel = donateProductsItemViewModel
+        val meaningsItemViewModel = ViewModelProvider(callbacks.fetchFragment() as MeaningsFragment, MeaningsItemViewModelFactory(callbacks)).get(MeaningsItemViewModel::class.java)
+        meaningsListItemBinding.meaningsItemViewModel = meaningsItemViewModel
         meaningsListItemBinding.uiViewModel = uiViewModel
-        return MeaningsViewHolder(meaningsListItemBinding.root, donateProductsItemViewModel, meaningsListItemBinding)
+        return MeaningsViewHolder(meaningsListItemBinding.root, meaningsItemViewModel, meaningsListItemBinding)
     }
 
     inner class MeaningsViewHolder internal constructor(itemView: View, viewModel: MeaningsItemViewModel, viewDataBinding: MeaningsListItemBinding) :
