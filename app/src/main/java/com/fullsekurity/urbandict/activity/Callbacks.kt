@@ -8,5 +8,5 @@ interface Callbacks {
     fun fetchActivity(): MainActivity
     fun fetchFragment(): Fragment?
     fun fetchRootView() : View
-    fun fetchDonateProductsListViewModel() : MeaningsListViewModel?
+    fun fetchmeaningsListViewModel() : MeaningsListViewModel?
 }

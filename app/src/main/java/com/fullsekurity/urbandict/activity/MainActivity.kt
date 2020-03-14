@@ -171,6 +171,6 @@ class MainActivity : AppCompatActivity(), Callbacks {
         return activityMainBinding.root
     }
 
-    override fun fetchDonateProductsListViewModel() : MeaningsListViewModel? { return null }
+    override fun fetchmeaningsListViewModel() : MeaningsListViewModel? { return null }
 
 }

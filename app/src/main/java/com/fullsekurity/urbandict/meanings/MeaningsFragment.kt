@@ -56,7 +56,7 @@ class MeaningsFragment : Fragment(), Callbacks {
         binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.meanings_fragment, container, false) as MeaningsFragmentBinding
         binding.lifecycleOwner = this
         meaningsListViewModel = ViewModelProvider(this, MeaningsListViewModelFactory(this)).get(MeaningsListViewModel::class.java)
-        binding.donateProductsListViewModel = meaningsListViewModel
+        binding.meaningsListViewModel = meaningsListViewModel
         binding.uiViewModel = uiViewModel
         meaningsListViewModel.transitionToCreateDonation = transitionToCreateDonation
         uiViewModel.currentTheme = (activity as MainActivity).currentTheme
@@ -91,7 +91,7 @@ class MeaningsFragment : Fragment(), Callbacks {
         return binding.root
     }
 
-    override fun fetchDonateProductsListViewModel() : MeaningsListViewModel? {
+    override fun fetchmeaningsListViewModel() : MeaningsListViewModel? {
         return meaningsListViewModel
     }
 
