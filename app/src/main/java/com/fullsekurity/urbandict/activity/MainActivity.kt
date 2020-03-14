@@ -163,10 +163,6 @@ class MainActivity : AppCompatActivity(), Callbacks {
         return this
     }
 
-    override fun fetchFragment(): Fragment? {
-        return null
-    }
-
     override fun fetchRootView(): View {
         return activityMainBinding.root
     }

@@ -6,7 +6,6 @@ import com.fullsekurity.urbandict.meanings.MeaningsListViewModel
 
 interface Callbacks {
     fun fetchActivity(): MainActivity
-    fun fetchFragment(): Fragment?
     fun fetchRootView() : View
     fun fetchmeaningsListViewModel() : MeaningsListViewModel?
 }
