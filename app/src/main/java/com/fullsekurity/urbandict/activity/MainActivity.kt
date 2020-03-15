@@ -24,6 +24,7 @@ import com.fullsekurity.urbandict.meanings.MeaningsFragment
 import com.fullsekurity.urbandict.meanings.MeaningsListViewModel
 import com.fullsekurity.urbandict.repository.Repository
 import com.fullsekurity.urbandict.ui.UIViewModel
+import com.fullsekurity.urbandict.utils.Constants
 import com.fullsekurity.urbandict.utils.Constants.ROOT_FRAGMENT_TAG
 import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
 import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
@@ -82,15 +83,16 @@ class MainActivity : AppCompatActivity(), Callbacks {
     }
 
     private fun loadInitialFragment() {
-        supportFragmentManager.popBackStack(ROOT_FRAGMENT_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        loadMeaningsFragment()
+        if (supportFragmentManager.findFragmentByTag(ROOT_FRAGMENT_TAG) == null) {
+            loadMeaningsFragment()
+        }
     }
 
     private fun loadMeaningsFragment() {
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-            .replace(R.id.main_activity_container, MeaningsFragment.newInstance())
+            .replace(R.id.main_activity_container, MeaningsFragment.newInstance(), ROOT_FRAGMENT_TAG)
             .commitAllowingStateLoss()
     }
 
