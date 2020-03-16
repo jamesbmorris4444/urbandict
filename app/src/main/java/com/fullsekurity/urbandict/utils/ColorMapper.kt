@@ -20,6 +20,7 @@ class ColorMapper @Inject constructor() {
         ERROR("error", "#E40449"),
         WHITE("white", "#ffffff"),
         BLACK("black", "#000000"),
+        BLUE("blue", "#0000ff"),
         VERY_LIGHT_GRAY("veryLightGray", "#08000000"),
         LIGHTER_GRAY("lighterGray", "#38000000"),
         LIGHT_GRAY("lightGray", "#68000000"),

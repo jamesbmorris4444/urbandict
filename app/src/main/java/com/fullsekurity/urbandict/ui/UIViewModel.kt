@@ -108,12 +108,13 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
     val buttonTextSize: ObservableField<Float> = ObservableField(0f)
     val buttonTextTypeface: ObservableField<String> = ObservableField("")
 
-    val donorItemTextColor: ObservableField<String> = ObservableField("#ffffff")
-    val donorItemTextSize: ObservableField<Float> = ObservableField(0f)
-    val donorItemTextTypeface: ObservableField<String> = ObservableField("")
+    val meaningsItemTextColor: ObservableField<String> = ObservableField("#ffffff")
+    val meaningsItemTextSize: ObservableField<Float> = ObservableField(0f)
+    val meaningsItemTextTypeface: ObservableField<String> = ObservableField("")
     val wordItemTextColor: ObservableField<String> = ObservableField("#ffffff")
     val wordItemTextSize: ObservableField<Float> = ObservableField(0f)
     val wordItemTextTypeface: ObservableField<String> = ObservableField("")
+    val definitionItemTextColor: ObservableField<String> = ObservableField("#ffffff")
 
     val largeErrorTextColor: ObservableField<String> = ObservableField("#ffffff")
     val largeErrorTextSize: ObservableField<Float> = ObservableField(0f)
@@ -369,12 +370,13 @@ class UIViewModel(val activity: Application) : AndroidViewModel(activity) {
             buttonTextSize.set(textSizeMapper.map(theme, uiDataClass.buttonTextSize))
             buttonTextTypeface.set(typefaceMapper.map(theme, uiDataClass.buttonTextSize))
 
-            donorItemTextColor.set(colorMapper.map(theme, uiDataClass.donorItemTextColor))
-            donorItemTextSize.set(textSizeMapper.map(theme, uiDataClass.donorItemTextSize))
-            donorItemTextTypeface.set(typefaceMapper.map(theme, uiDataClass.donorItemTextSize))
+            meaningsItemTextColor.set(colorMapper.map(theme, uiDataClass.meaningsItemTextColor))
+            meaningsItemTextSize.set(textSizeMapper.map(theme, uiDataClass.meaningsItemTextSize))
+            meaningsItemTextTypeface.set(typefaceMapper.map(theme, uiDataClass.meaningsItemTextSize))
             wordItemTextColor.set(colorMapper.map(theme, uiDataClass.wordItemTextColor))
             wordItemTextSize.set(textSizeMapper.map(theme, uiDataClass.wordItemTextSize))
             wordItemTextTypeface.set(typefaceMapper.map(theme, uiDataClass.wordItemTextSize))
+            definitionItemTextColor.set(colorMapper.map(theme, uiDataClass.definitionItemTextColor))
 
             largeErrorTextColor.set(colorMapper.map(theme, uiDataClass.largeErrorTextColor))
             largeErrorTextSize.set(textSizeMapper.map(theme, uiDataClass.largeErrorTextSize))
