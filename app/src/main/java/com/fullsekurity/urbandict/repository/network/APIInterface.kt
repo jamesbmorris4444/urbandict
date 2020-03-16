@@ -2,6 +2,7 @@ package com.fullsekurity.urbandict.repository.network
 
 import com.fullsekurity.urbandict.repository.storage.Meaning
 import com.fullsekurity.urbandict.utils.Constants
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -15,7 +16,7 @@ interface APIInterface {
     @GET("define")
     fun getMeanings(
         @Query(Constants.URBANDICT_TERM) term: String
-    ): Observable<MeaningsResponse>
+    ): Flowable<MeaningsResponse>
 }
 
 data class MeaningsResponse (

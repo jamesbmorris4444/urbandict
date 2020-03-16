@@ -31,7 +31,15 @@ class MeaningsItemViewModel(private val callbacks: Callbacks) : RecyclerViewItem
         defId.set(item.defId.toString())
         currentVote.set(item.currentVote)
         val index = item.writtenOn.indexOf('T')
-        writtenOn.set("On: ${item.writtenOn.substring(0, index)}")
+        var date = "NO DATE"
+        if (index == 10) {
+            val rawDate = item.writtenOn.substring(0, index)
+            val split: MutableList<String> = rawDate.split('-').toMutableList()
+            if (split.size == 3) {
+                date = "${split[1]}/${split[2]}/${split[0]}"
+            }
+        }
+        writtenOn.set("On: $date")
         example.set(item.example)
         thumbsDown.set(item.thumbsDown.toString())
     }
