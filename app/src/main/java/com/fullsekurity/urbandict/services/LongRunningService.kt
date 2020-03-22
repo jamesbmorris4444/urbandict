@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Binder
 import android.os.Handler
 import android.os.IBinder
-import android.widget.Toast
 import com.fullsekurity.urbandict.logger.LogUtils
 
 

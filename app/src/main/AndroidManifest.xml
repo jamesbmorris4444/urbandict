@@ -27,6 +27,7 @@
         </activity>
 
         <service android:name=".services.LongRunningService" />
+        <service android:name=".services.RemoteService" />
     </application>
 
 </manifest>

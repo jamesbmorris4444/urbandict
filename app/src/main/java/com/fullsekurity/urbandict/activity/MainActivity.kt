@@ -8,12 +8,14 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.os.Bundle
-import android.os.IBinder
+import android.os.*
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -23,11 +25,12 @@ import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.databinding.ActivityMainBinding
-import com.fullsekurity.urbandict.services.LongRunningService
 import com.fullsekurity.urbandict.logger.LogUtils
 import com.fullsekurity.urbandict.meanings.MeaningsFragment
 import com.fullsekurity.urbandict.meanings.MeaningsListViewModel
 import com.fullsekurity.urbandict.repository.Repository
+import com.fullsekurity.urbandict.services.LongRunningService
+import com.fullsekurity.urbandict.services.RemoteService
 import com.fullsekurity.urbandict.services.ServiceCallbacks
 import com.fullsekurity.urbandict.ui.UIViewModel
 import com.fullsekurity.urbandict.utils.Constants.ROOT_FRAGMENT_TAG
@@ -35,6 +38,7 @@ import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
 import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
+import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 
@@ -53,17 +57,6 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
     }
 
     lateinit var currentTheme: UITheme
-
-    override fun onResume() {
-        super.onResume()
-        setupToolbar()
-        uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
-
-        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: bindService in onResume()"))
-        Intent(this, LongRunningService::class.java).also { intent ->
-            bindService(intent, connection, Context.BIND_AUTO_CREATE)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.plant(Timber.DebugTree())
@@ -86,7 +79,35 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
         if (name != null) {
             currentTheme = UITheme.valueOf(name)
         }
+
+        // Start Service
+
         serviceProgressBar = service_progresss_bar
+        timestampText = timestamp_text
+        printTimestampButton = print_timestamp
+        stopServiceButton = stop_service
+
+        printTimestampButton.setOnClickListener { view ->
+            if (remoteServiceConnected) {
+                try {
+                    val msg = Message.obtain(null, RemoteService.MSG_GET_TIMESTAMP, 0, 0)
+                    msg.replyTo = activityMessenger
+                    remoteServiceMessenger?.send(msg)
+                } catch (e: RemoteException) {
+                    LogUtils.E(LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), e)
+                }
+            }
+        }
+
+        stopServiceButton.setOnClickListener {
+            if (remoteServiceConnected) {
+                unbindService(remoteServiceConnection)
+                remoteServiceConnected = false;
+            }
+            stopService(Intent(this, RemoteService::class.java))
+        }
+
+        // End Service
     }
 
     // Start Service
@@ -94,10 +115,16 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
     private val TAG = MainActivity::class.java.simpleName
     lateinit var longRunningService: LongRunningService
     private lateinit var serviceProgressBar: ProgressBar
+    private var remoteServiceMessenger: Messenger? = null
+    private val activityMessenger: Messenger = Messenger(ActivityHandler(this))
+    private var remoteServiceConnected = false
+    private lateinit var timestampText: TextView
+    private lateinit var printTimestampButton: ImageView
+    private lateinit var stopServiceButton: ImageView
 
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
-            LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onServiceConnected()"))
+            LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onremoteServiceConnected()"))
             val binder = service as LongRunningService.LocalBinder
             longRunningService = binder.getService()
             longRunningService.setServiceCallbacks(this@MainActivity)
@@ -107,10 +134,35 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setupToolbar()
+        uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
+
+        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: bindService in onResume()"))
+        val intent = Intent(this, LongRunningService::class.java)
+        startService(intent)
+        bindService(intent, connection, Context.BIND_AUTO_CREATE)
+
+        val remoteIntent = Intent(this, RemoteService::class.java)
+        startService(remoteIntent)
+        bindService(remoteIntent, remoteServiceConnection, Context.BIND_AUTO_CREATE)
+    }
+
     override fun onStop() {
         super.onStop()
         unbindService(connection)
+        if (remoteServiceConnected) {
+            unbindService(remoteServiceConnection);
+            remoteServiceConnected = false;
+        }
         LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onStop unbindService()"))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService(Intent(this, LongRunningService::class.java))
+        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onDestroy stopService()"))
     }
 
     fun startPretendLongRunningTask() {
@@ -135,6 +187,31 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
     override fun setProgressMaxValue(maxValue: Int) {
         serviceProgressBar.max = maxValue
 
+    }
+
+    private val remoteServiceConnection: ServiceConnection = object : ServiceConnection {
+        override fun onServiceDisconnected(name: ComponentName) {
+            remoteServiceMessenger = null
+            remoteServiceConnected = false
+        }
+
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            remoteServiceMessenger = Messenger(service)
+            remoteServiceConnected = true
+        }
+    }
+
+    internal class ActivityHandler(activity: MainActivity?) : Handler() {
+        private val activity = WeakReference<MainActivity>(activity)
+        override fun handleMessage(msg: Message) {
+            when (msg.what) {
+                RemoteService.MSG_GET_TIMESTAMP -> {
+                    activity.get()?. let { activity_get ->
+                        activity_get.timestampText.text = msg.data.getString("timestamp")
+                    }
+                }
+            }
+        }
     }
 
     // End Service
