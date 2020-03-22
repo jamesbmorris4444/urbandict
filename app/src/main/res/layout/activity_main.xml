@@ -56,9 +56,17 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+        <ProgressBar
+            android:id="@+id/service_progresss_bar"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/toolbar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <FrameLayout
                 android:id="@+id/main_activity_container"
-                android:layout_below="@+id/toolbar"
+                android:layout_below="@+id/service_progresss_bar"
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

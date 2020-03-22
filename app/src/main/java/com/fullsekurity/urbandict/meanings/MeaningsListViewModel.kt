@@ -80,10 +80,19 @@ class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewView
     var editTextNameVisibility: ObservableField<Int> = ObservableField(View.VISIBLE)
 
     fun onSearchClicked(view: View) {
-        Utils.hideKeyboard(view)
-        val progressBar = callbacks.fetchActivity().getMainProgressBar()
-        progressBar.visibility = View.VISIBLE
-        repository.getUrbanDictionaryMeanings(editTextNameInput.get() ?: "", this::showMeanings)
+        val enteredText: String = editTextNameInput.get() ?: ""
+        if (enteredText == "start") {
+            callbacks.fetchActivity().startPretendLongRunningTask()
+        } else if (enteredText == "pause") {
+            callbacks.fetchActivity().pausePretendLongRunningTask()
+        } else if (enteredText == "resume") {
+            callbacks.fetchActivity().resumePretendLongRunningTask()
+        } else {
+            Utils.hideKeyboard(view)
+            val progressBar = callbacks.fetchActivity().getMainProgressBar()
+            progressBar.visibility = View.VISIBLE
+            repository.getUrbanDictionaryMeanings(enteredText, this::showMeanings)
+        }
     }
 
     private fun showMeanings(meaningsList: List<Meaning>?) {

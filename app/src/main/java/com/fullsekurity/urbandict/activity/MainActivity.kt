@@ -1,11 +1,15 @@
 package com.fullsekurity.urbandict.activity
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.IBinder
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -15,16 +19,17 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.airbnb.lottie.*
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.databinding.ActivityMainBinding
+import com.fullsekurity.urbandict.services.LongRunningService
+import com.fullsekurity.urbandict.logger.LogUtils
 import com.fullsekurity.urbandict.meanings.MeaningsFragment
 import com.fullsekurity.urbandict.meanings.MeaningsListViewModel
 import com.fullsekurity.urbandict.repository.Repository
+import com.fullsekurity.urbandict.services.ServiceCallbacks
 import com.fullsekurity.urbandict.ui.UIViewModel
-import com.fullsekurity.urbandict.utils.Constants
 import com.fullsekurity.urbandict.utils.Constants.ROOT_FRAGMENT_TAG
 import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
 import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
@@ -33,7 +38,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity(), Callbacks {
+class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
 
     lateinit var repository: Repository
     @Inject
@@ -53,6 +58,11 @@ class MainActivity : AppCompatActivity(), Callbacks {
         super.onResume()
         setupToolbar()
         uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
+
+        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: bindService in onResume()"))
+        Intent(this, LongRunningService::class.java).also { intent ->
+            bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +86,58 @@ class MainActivity : AppCompatActivity(), Callbacks {
         if (name != null) {
             currentTheme = UITheme.valueOf(name)
         }
+        serviceProgressBar = service_progresss_bar
     }
+
+    // Start Service
+
+    private val TAG = MainActivity::class.java.simpleName
+    lateinit var longRunningService: LongRunningService
+    private lateinit var serviceProgressBar: ProgressBar
+
+    private val connection = object : ServiceConnection {
+        override fun onServiceConnected(className: ComponentName, service: IBinder) {
+            LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onServiceConnected()"))
+            val binder = service as LongRunningService.LocalBinder
+            longRunningService = binder.getService()
+            longRunningService.setServiceCallbacks(this@MainActivity)
+        }
+        override fun onServiceDisconnected(arg0: ComponentName) {
+            LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onServiceDisconnected()"))
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unbindService(connection)
+        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onStop unbindService()"))
+    }
+
+    fun startPretendLongRunningTask() {
+        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: startPretendLongRunningTask()"))
+        longRunningService.startPretendLongRunningTask()
+    }
+
+    fun pausePretendLongRunningTask() {
+        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: pausePretendLongRunningTask()"))
+        longRunningService.pausePretendLongRunningTask()
+    }
+
+    fun resumePretendLongRunningTask() {
+        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: resumePretendLongRunningTask()"))
+        longRunningService.resumePretendLongRunningTask()
+    }
+
+    override fun setServiceProgress(progress: Int) {
+        serviceProgressBar.progress = progress
+    }
+
+    override fun setProgressMaxValue(maxValue: Int) {
+        serviceProgressBar.max = maxValue
+
+    }
+
+    // End Service
 
     fun getMainProgressBar(): ProgressBar {
         return main_progress_bar
