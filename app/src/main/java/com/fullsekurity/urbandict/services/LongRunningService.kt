@@ -14,9 +14,9 @@ class LongRunningService : Service() {
     private val TAG = LongRunningService::class.java.simpleName
     private val binder = LocalBinder()
     private lateinit var handler: Handler
-    var progress = 0
-    var maxValue = 5000
-    var isPaused = true
+    private var progress = 0
+    private var maxValue = 5000
+    private var isPaused = true
     private lateinit var serviceCallbacks: ServiceCallbacks
 
     fun setServiceCallbacks(serviceCallbacks: ServiceCallbacks) {
@@ -24,7 +24,6 @@ class LongRunningService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show()
         LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("LocationService: onBind()"))
         return binder
     }
@@ -32,7 +31,6 @@ class LongRunningService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("LocationService: onDestroy()"))
-        Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show()
         isPaused = true
         pretendLongRunningTask()
     }
