@@ -12,7 +12,6 @@ import android.os.*
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -30,7 +29,6 @@ import com.fullsekurity.urbandict.meanings.MeaningsFragment
 import com.fullsekurity.urbandict.meanings.MeaningsListViewModel
 import com.fullsekurity.urbandict.repository.Repository
 import com.fullsekurity.urbandict.services.LongRunningService
-import com.fullsekurity.urbandict.services.RemoteService
 import com.fullsekurity.urbandict.services.ServiceCallbacks
 import com.fullsekurity.urbandict.ui.UIViewModel
 import com.fullsekurity.urbandict.utils.Constants.ROOT_FRAGMENT_TAG
@@ -79,35 +77,7 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
         if (name != null) {
             currentTheme = UITheme.valueOf(name)
         }
-
-        // Start Service
-
         serviceProgressBar = service_progresss_bar
-        timestampText = timestamp_text
-        printTimestampButton = print_timestamp
-        stopServiceButton = stop_service
-
-        printTimestampButton.setOnClickListener { view ->
-            if (remoteServiceConnected) {
-                try {
-                    val msg = Message.obtain(null, RemoteService.MSG_GET_TIMESTAMP, 0, 0)
-                    msg.replyTo = activityMessenger
-                    remoteServiceMessenger?.send(msg)
-                } catch (e: RemoteException) {
-                    LogUtils.E(LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), e)
-                }
-            }
-        }
-
-        stopServiceButton.setOnClickListener {
-            if (remoteServiceConnected) {
-                unbindService(remoteServiceConnection)
-                remoteServiceConnected = false;
-            }
-            stopService(Intent(this, RemoteService::class.java))
-        }
-
-        // End Service
     }
 
     // Start Service
@@ -115,12 +85,6 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
     private val TAG = MainActivity::class.java.simpleName
     lateinit var longRunningService: LongRunningService
     private lateinit var serviceProgressBar: ProgressBar
-    private var remoteServiceMessenger: Messenger? = null
-    private val activityMessenger: Messenger = Messenger(ActivityHandler(this))
-    private var remoteServiceConnected = false
-    private lateinit var timestampText: TextView
-    private lateinit var printTimestampButton: ImageView
-    private lateinit var stopServiceButton: ImageView
 
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
@@ -143,19 +107,11 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
         val intent = Intent(this, LongRunningService::class.java)
         startService(intent)
         bindService(intent, connection, Context.BIND_AUTO_CREATE)
-
-        val remoteIntent = Intent(this, RemoteService::class.java)
-        startService(remoteIntent)
-        bindService(remoteIntent, remoteServiceConnection, Context.BIND_AUTO_CREATE)
     }
 
     override fun onStop() {
         super.onStop()
         unbindService(connection)
-        if (remoteServiceConnected) {
-            unbindService(remoteServiceConnection);
-            remoteServiceConnected = false;
-        }
         LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onStop unbindService()"))
     }
 
@@ -187,31 +143,6 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
     override fun setProgressMaxValue(maxValue: Int) {
         serviceProgressBar.max = maxValue
 
-    }
-
-    private val remoteServiceConnection: ServiceConnection = object : ServiceConnection {
-        override fun onServiceDisconnected(name: ComponentName) {
-            remoteServiceMessenger = null
-            remoteServiceConnected = false
-        }
-
-        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-            remoteServiceMessenger = Messenger(service)
-            remoteServiceConnected = true
-        }
-    }
-
-    internal class ActivityHandler(activity: MainActivity?) : Handler() {
-        private val activity = WeakReference<MainActivity>(activity)
-        override fun handleMessage(msg: Message) {
-            when (msg.what) {
-                RemoteService.MSG_GET_TIMESTAMP -> {
-                    activity.get()?. let { activity_get ->
-                        activity_get.timestampText.text = msg.data.getString("timestamp")
-                    }
-                }
-            }
-        }
     }
 
     // End Service

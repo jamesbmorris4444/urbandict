@@ -81,11 +81,11 @@ class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewView
 
     fun onSearchClicked(view: View) {
         val enteredText: String = editTextNameInput.get() ?: ""
-        if (enteredText == "start") {
+        if (enteredText == "s") {
             callbacks.fetchActivity().startPretendLongRunningTask()
-        } else if (enteredText == "pause") {
+        } else if (enteredText == "p") {
             callbacks.fetchActivity().pausePretendLongRunningTask()
-        } else if (enteredText == "resume") {
+        } else if (enteredText == "r") {
             callbacks.fetchActivity().resumePretendLongRunningTask()
         } else {
             Utils.hideKeyboard(view)
