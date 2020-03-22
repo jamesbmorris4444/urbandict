@@ -77,7 +77,6 @@ class LongRunningService : Service() {
                     progress += 10 // increment the progress
                     handler.postDelayed(this, 100)
                     serviceCallbacks.setServiceProgress(progress)
-                    LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("pretendLongRunningTask: progress=%d", progress))
                 }
             }
         }
