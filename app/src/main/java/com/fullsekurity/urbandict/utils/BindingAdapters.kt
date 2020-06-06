@@ -133,13 +133,6 @@ fun setTextHintColor(view: EditText, color: String) {
     view.setHintTextColor(Color.parseColor(color))
 }
 
-@BindingAdapter("edit_text_cursor")
-fun setEditTextCursor(view: EditText, resInt: Int) {
-    val f: Field = TextView::class.java.getDeclaredField("mCursorDrawableRes")
-    f.isAccessible = true
-    f.set(view, resInt)
-}
-
 @BindingAdapter("set_hint")
 fun setHint(view: TextView, hint: String) {
     view.hint = hint
