@@ -72,8 +72,8 @@ class UIDataModel {
 
                         "black",
                         "largeTextBold",
-                        "success",
-                        "mainTitleBold",
+                        "blue",
+                        "largeTextBold",
                         "blue",
 
                         "error",

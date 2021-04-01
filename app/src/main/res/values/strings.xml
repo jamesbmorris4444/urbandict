@@ -15,7 +15,7 @@
     <string name="button_search">Search</string>
 
     <!-- miscellaneous -->
-    <string name="search_no_elements">No Urban Dictionary meanings found</string>
+    <string name="search_no_elements">No GitHub public repos found</string>
     <string name="meanings_hint_text">Enter Search Term</string>
 
 </resources>

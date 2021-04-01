@@ -1,5 +1,6 @@
 package com.fullsekurity.urbandict.meanings
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.view.View
 import androidx.databinding.ObservableField
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fullsekurity.urbandict.R
 import com.fullsekurity.urbandict.activity.Callbacks
+import com.fullsekurity.urbandict.logger.LogUtils
 import com.fullsekurity.urbandict.recyclerview.RecyclerViewViewModel
 import com.fullsekurity.urbandict.repository.Repository
 import com.fullsekurity.urbandict.repository.storage.Meaning
@@ -16,8 +18,10 @@ import com.fullsekurity.urbandict.ui.UIViewModel
 import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
 import com.fullsekurity.urbandict.utils.Utils
 import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
+import com.fullsekurity.urbandict.webview.QuizWebView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.meanings_fragment.view.*
 import javax.inject.Inject
 
 class MeaningsListViewModelFactory(private val callbacks: Callbacks) : ViewModelProvider.Factory {
@@ -30,8 +34,11 @@ class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewView
 
     override var adapter: MeaningsAdapter = MeaningsAdapter(callbacks)
     override val itemDecorator: RecyclerView.ItemDecoration? = null
-    val listIsVisible: ObservableField<Boolean> = ObservableField(true)
+    val listIsVisible: ObservableField<Int> = ObservableField(View.VISIBLE)
+    val errorIsVisible: ObservableField<Int> = ObservableField(View.GONE)
     val submitVisible: ObservableField<Int> = ObservableField(View.GONE)
+    val searchVisibility: ObservableField<Int> = ObservableField(View.VISIBLE)
+    val webVisibility: ObservableField<Int> = ObservableField(View.GONE)
 
     @Inject
     lateinit var uiViewModel: UIViewModel
@@ -95,19 +102,47 @@ class MeaningsListViewModel(private val callbacks: Callbacks) : RecyclerViewView
         }
     }
 
-    private fun showMeanings(meaningsList: List<Meaning>?) {
+    private fun showMeanings(meaningsList: List<Meaning>) {
         val progressBar = callbacks.fetchActivity().getMainProgressBar()
         progressBar.visibility = View.GONE
-        if (meaningsList == null) {
-            listIsVisible.set(false)
+        if (meaningsList?.isEmpty()) {
+            listIsVisible.set(View.GONE)
+            errorIsVisible.set(View.VISIBLE)
         } else {
-            listIsVisible.set(meaningsList.isNotEmpty())
-            if (uiViewModel.sortThumbsUp) {
-                adapter.addAll(meaningsList.sortedByDescending { meaning -> Utils.donorComparisonByThumbsUp(meaning) })
-            } else {
-                adapter.addAll(meaningsList.sortedByDescending { meaning -> Utils.donorComparisonByThumbsDown(meaning) })
+            listIsVisible.set(View.VISIBLE)
+            errorIsVisible.set(View.GONE)
+            val fullList = meaningsList.sortedByDescending { meaning -> Utils.stargazerComparison(meaning) }
+            val smallList: MutableList<Meaning> = mutableListOf()
+            for (index in 0 until kotlin.math.min(fullList.size, 3)) {
+                smallList.add(fullList[index])
             }
+            adapter.addAll(smallList)
         }
+    }
+
+    fun backPressed() {
+        if (webVisibility.get() == View.VISIBLE) {
+            searchVisibility.set(View.VISIBLE)
+            webVisibility.set(View.GONE)
+            listIsVisible.set(View.VISIBLE)
+            errorIsVisible.set(View.GONE)
+        } else {
+            callbacks.fetchActivity().onBackPressed()
+        }
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    fun onUrlClicked(view: View, url: String) {
+        searchVisibility.set(View.GONE)
+        webVisibility.set(View.VISIBLE)
+        listIsVisible.set(View.GONE)
+        errorIsVisible.set(View.GONE)
+        val webView = callbacks.fetchRootView().webview
+        webView.webViewClient = QuizWebView()
+        webView.settings.loadsImagesAutomatically = true
+        webView.settings.javaScriptEnabled = true
+        webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+        webView.loadUrl(url)
     }
 
 }

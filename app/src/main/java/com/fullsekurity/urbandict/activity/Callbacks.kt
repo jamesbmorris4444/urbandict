@@ -7,5 +7,5 @@ import com.fullsekurity.urbandict.meanings.MeaningsListViewModel
 interface Callbacks {
     fun fetchActivity(): MainActivity
     fun fetchRootView() : View
-    fun fetchmeaningsListViewModel() : MeaningsListViewModel?
+    fun fetchmeaningsListViewModel() : MeaningsListViewModel
 }

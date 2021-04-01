@@ -6,17 +6,17 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface APIInterface {
-    @Headers(
-        Constants.URBANDICT_RAPID_API_HOST,
-        Constants.URBANDICT_RAPID_API_KEY
-    )
-    @GET("define")
+    @GET("users/{user}/repos")
     fun getMeanings(
-        @Query(Constants.URBANDICT_TERM) term: String
-    ): Flowable<MeaningsResponse>
+        @Path(Constants.URBANDICT_TERM) term: String,
+        @Query(Constants.PER_PAGE) perPage: Int,
+        @Query(Constants.PAGE) page: Int,
+        @Query(Constants.DIRECTION) direction: String
+    ): Flowable<List<Meaning>>
 }
 
 data class MeaningsResponse (

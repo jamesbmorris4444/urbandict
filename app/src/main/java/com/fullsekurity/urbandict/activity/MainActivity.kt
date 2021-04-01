@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
     private lateinit var lottieBackgroundView: LottieAnimationView
     private lateinit var activityMainBinding: ActivityMainBinding
     private var thumbsStatusMenuItem: MenuItem? = null
+    private lateinit var meaningsFragment: MeaningsFragment
 
     enum class UITheme {
         LIGHT, DARK, NOT_ASSIGNED,
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
         activityMainBinding.mainActivity = this
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { meaningsFragment.meaningsListViewModel.backPressed() }
         lottieBackgroundView = main_background_lottie
         loadInitialFragment()
         val settings = getSharedPreferences("THEME", Context.MODE_PRIVATE)
@@ -158,10 +159,11 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
     }
 
     private fun loadMeaningsFragment() {
+        meaningsFragment = MeaningsFragment.newInstance()
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-            .replace(R.id.main_activity_container, MeaningsFragment.newInstance(), ROOT_FRAGMENT_TAG)
+            .replace(R.id.main_activity_container, meaningsFragment, ROOT_FRAGMENT_TAG)
             .commitAllowingStateLoss()
     }
 
@@ -238,6 +240,6 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
         return activityMainBinding.root
     }
 
-    override fun fetchmeaningsListViewModel() : MeaningsListViewModel? { return null }
+    override fun fetchmeaningsListViewModel() : MeaningsListViewModel { return MeaningsListViewModel(this) }
 
 }

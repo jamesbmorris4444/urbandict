@@ -16,7 +16,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="match_parent" >
 
         <!-- Start Search Box -->
 
@@ -106,7 +106,7 @@
                 android:id="@+id/donorsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="@{safeUnbox(meaningsListViewModel.listIsVisible ? View.VISIBLE : View.GONE)}"
+                android:visibility="@{meaningsListViewModel.listIsVisible}"
                 android:paddingBottom="200dp"
                 android:clipToPadding="false"
                 app:recyclerViewViewModel="@{meaningsListViewModel}"
@@ -119,19 +119,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/search_no_elements"
-                android:visibility="@{safeUnbox(meaningsListViewModel.listIsVisible ? View.GONE : View.VISIBLE)}"
-                android:layout_marginTop="120dp"
+                android:visibility="@{meaningsListViewModel.errorIsVisible}"
+                android:layout_marginTop="80dp"
                 app:text_font="@{uiViewModel.largeErrorTextTypeface}"
                 app:text_color="@{uiViewModel.largeErrorTextColor}"
                 app:text_size="@{safeUnbox(uiViewModel.largeErrorTextSize)}"
                 app:layout_marginLeft="@{safeUnbox(uiViewModel.standardLeftAndRightMargin)}"
                 app:layout_marginRight="@{safeUnbox(uiViewModel.standardLeftAndRightMargin)}"
                 app:layout_constraintTop_toBottomOf="@+id/top_divider"
-                app:layout_constraintBottom_toBottomOf="parent"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
 
         <!-- End Meaning List -->
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/sign_in_visibility_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{meaningsListViewModel.searchVisibility}"
+            app:constraint_referenced_ids="top_divider,submit_button_text,submit_button_icon,edit_text_input_name" />
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{meaningsListViewModel.webVisibility}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

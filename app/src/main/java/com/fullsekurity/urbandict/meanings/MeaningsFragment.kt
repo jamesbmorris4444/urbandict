@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 class MeaningsFragment : Fragment(), Callbacks {
 
-    private lateinit var meaningsListViewModel: MeaningsListViewModel
+    lateinit var meaningsListViewModel: MeaningsListViewModel
     private lateinit var binding: MeaningsFragmentBinding
     private lateinit var mainActivity: MainActivity
 
@@ -82,7 +82,7 @@ class MeaningsFragment : Fragment(), Callbacks {
         return binding.root
     }
 
-    override fun fetchmeaningsListViewModel() : MeaningsListViewModel? {
+    override fun fetchmeaningsListViewModel() : MeaningsListViewModel {
         return meaningsListViewModel
     }
 

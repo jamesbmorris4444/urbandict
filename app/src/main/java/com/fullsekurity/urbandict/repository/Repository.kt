@@ -17,19 +17,19 @@ class Repository(private val callbacks: Callbacks) {
 
     private val meaningsService: APIInterface = APIClient.client
 
-    fun getUrbanDictionaryMeanings(term: String, showMeanings: (meaningsList: List<Meaning>?) -> Unit) {
+    fun getUrbanDictionaryMeanings(term: String, showMeanings: (meaningsList: List<Meaning>) -> Unit) {
         var disposable: Disposable? = null
-        disposable = meaningsService.getMeanings(term)
+        disposable = meaningsService.getMeanings(term, 100, 1, "asc")
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .timeout(15L, TimeUnit.SECONDS)
             .subscribe ({ meaningsResponse ->
                 disposable?.dispose()
-                showMeanings(meaningsResponse.list)
+                showMeanings(meaningsResponse)
             },
             { throwable ->
                 disposable?.dispose()
-                showMeanings(null)
+                showMeanings(listOf())
                 getUrbanDictionaryMeaningsFailure(callbacks.fetchActivity(),"getUrbanDictionaryMeanings", throwable)
             })
     }

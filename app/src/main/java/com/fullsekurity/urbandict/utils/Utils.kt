@@ -21,11 +21,15 @@ class Utils {
         }
 
         fun donorComparisonByThumbsUp(meaning: Meaning): Int {
-            return meaning.thumbsUp
+            return 0
         }
 
         fun donorComparisonByThumbsDown(meaning: Meaning): Int {
-            return meaning.thumbsDown
+            return 0
+        }
+
+        fun stargazerComparison(meaning: Meaning): Int {
+            return meaning.stargazersCount
         }
 
         fun newPatternOfSubpatterns(patternOfSubpatterns: String, index: Int, newPattern: String): String {
