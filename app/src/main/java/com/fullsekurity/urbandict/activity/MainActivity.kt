@@ -86,7 +86,6 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
             } else {
                 sBuffer.append(" ${wordList[i]}")
             }
-            LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("aa=%s   %s", wordList[i], sBuffer.toString()))
         }
         LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("original string=%s", stringToConvert))
         LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("reversed string=%s", sBuffer.toString()))
