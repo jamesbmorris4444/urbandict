@@ -12,9 +12,7 @@ import android.os.*
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -36,7 +34,6 @@ import com.fullsekurity.urbandict.utils.DaggerViewModelDependencyInjector
 import com.fullsekurity.urbandict.utils.ViewModelInjectorModule
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
-import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 
@@ -79,6 +76,20 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
             currentTheme = UITheme.valueOf(name)
         }
         serviceProgressBar = service_progresss_bar
+
+        val stringToConvert = "The quick brown fox jumped over the lazy dog"
+        val wordList: List<String> = stringToConvert.split(" ")
+        val sBuffer = StringBuffer()
+        for (i in wordList.size - 1 downTo 0) {
+            if (i == wordList.size - 1) {
+                sBuffer.append(wordList[i])
+            } else {
+                sBuffer.append(" ${wordList[i]}")
+            }
+            LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("aa=%s   %s", wordList[i], sBuffer.toString()))
+        }
+        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("original string=%s", stringToConvert))
+        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("reversed string=%s", sBuffer.toString()))
     }
 
     // Start Service
@@ -89,22 +100,38 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
 
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
-            LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onremoteServiceConnected()"))
+            LogUtils.D(
+                TAG,
+                LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM),
+                String.format("MainActivity: onremoteServiceConnected()")
+            )
             val binder = service as LongRunningService.LocalBinder
             longRunningService = binder.getService()
             longRunningService.setServiceCallbacks(this@MainActivity)
         }
         override fun onServiceDisconnected(arg0: ComponentName) {
-            LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onServiceDisconnected()"))
+            LogUtils.D(
+                TAG,
+                LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM),
+                String.format("MainActivity: onServiceDisconnected()")
+            )
         }
     }
 
     override fun onResume() {
         super.onResume()
         setupToolbar()
-        uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
+        uiViewModel.lottieAnimation(
+            lottieBackgroundView,
+            uiViewModel.backgroundLottieJsonFileName,
+            LottieDrawable.INFINITE
+        )
 
-        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: bindService in onResume()"))
+        LogUtils.D(
+            TAG,
+            LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM),
+            String.format("MainActivity: bindService in onResume()")
+        )
         val intent = Intent(this, LongRunningService::class.java)
         startService(intent)
         bindService(intent, connection, Context.BIND_AUTO_CREATE)
@@ -113,27 +140,47 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
     override fun onStop() {
         super.onStop()
         unbindService(connection)
-        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onStop unbindService()"))
+        LogUtils.D(
+            TAG,
+            LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM),
+            String.format("MainActivity: onStop unbindService()")
+        )
     }
 
     override fun onDestroy() {
         super.onDestroy()
         stopService(Intent(this, LongRunningService::class.java))
-        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: onDestroy stopService()"))
+        LogUtils.D(
+            TAG,
+            LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM),
+            String.format("MainActivity: onDestroy stopService()")
+        )
     }
 
     fun startPretendLongRunningTask() {
-        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: startPretendLongRunningTask()"))
+        LogUtils.D(
+            TAG,
+            LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM),
+            String.format("MainActivity: startPretendLongRunningTask()")
+        )
         longRunningService.startPretendLongRunningTask()
     }
 
     fun pausePretendLongRunningTask() {
-        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: pausePretendLongRunningTask()"))
+        LogUtils.D(
+            TAG,
+            LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM),
+            String.format("MainActivity: pausePretendLongRunningTask()")
+        )
         longRunningService.pausePretendLongRunningTask()
     }
 
     fun resumePretendLongRunningTask() {
-        LogUtils.D(TAG, LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM), String.format("MainActivity: resumePretendLongRunningTask()"))
+        LogUtils.D(
+            TAG,
+            LogUtils.FilterTags.withTags(LogUtils.TagFilter.THM),
+            String.format("MainActivity: resumePretendLongRunningTask()")
+        )
         longRunningService.resumePretendLongRunningTask()
     }
 
@@ -206,7 +253,11 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
                 currentTheme = UITheme.LIGHT
             }
             uiViewModel.currentTheme = currentTheme
-            uiViewModel.lottieAnimation(lottieBackgroundView, uiViewModel.backgroundLottieJsonFileName, LottieDrawable.INFINITE)
+            uiViewModel.lottieAnimation(
+                lottieBackgroundView,
+                uiViewModel.backgroundLottieJsonFileName,
+                LottieDrawable.INFINITE
+            )
             setupToolbar()
             true
         }
@@ -240,6 +291,8 @@ class MainActivity : AppCompatActivity(), Callbacks, ServiceCallbacks {
         return activityMainBinding.root
     }
 
-    override fun fetchmeaningsListViewModel() : MeaningsListViewModel { return MeaningsListViewModel(this) }
+    override fun fetchmeaningsListViewModel() : MeaningsListViewModel { return MeaningsListViewModel(
+        this
+    ) }
 
 }
